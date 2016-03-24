@@ -23,3 +23,12 @@
 - /style/icon/ - icon
 
 #### /res/ - 第三方 模块以外的资源 cue 优化时会忽略改目录
+- res/framework7 - 框架
+
+#### main.entry.js - App 入口
+
+## 编译
+
+- `c release qa` - 编译
+- `c release op` - 编译&压缩
+- `c release md5` - 编译&压缩&md5
