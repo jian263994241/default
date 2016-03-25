@@ -14,16 +14,16 @@
 
 - /page/index.html - index 模块入口
 
-#### /style - 全局资源
+#### /res - 全局资源
 
-- /style/css/ - 全局样式(CSS,less)
+- /res/css/ - 全局样式(CSS,less)
 
-- /style/image/ - 图片
+- /res/image/ - 图片
 
-- /style/icon/ - icon
+- /res/icon/ - icon
 
-#### /res/ - 第三方 模块以外的资源 cue 优化时会忽略改目录
-- res/framework7 - 框架
+#### /third/ - 第三方 模块以外的资源 cue 优化时会忽略改目录
+- /third/framework7 - 框架
 
 #### main.entry.js - App 入口
 
