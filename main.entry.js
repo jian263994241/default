@@ -21,7 +21,7 @@ $$(document).on('pageInit', function(e){
 });
 
 viewMain.router.load({
-  url: 'pages/index.html',
+  url: 'page/index.html',
   animatePages: false,
   pushState:false
 });
