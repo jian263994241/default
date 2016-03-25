@@ -5,9 +5,9 @@ module.exports = {
     return Boolean(ua.match(/MicroMessenger/i) == 'micromessenger');
   },
   isAndroid: function() {
-    return (ua.indexOf('Android') > -1 || u.indexOf('Linux') > -1)
+    return (ua.indexOf('android') > -1 || ua.indexOf('linux') > -1)
   },
   isIOS:function(){
-    return (ua.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1);
+    return (ua.indexOf('iphone') > -1 || ua.indexOf('mac') > -1);
   }
 }
