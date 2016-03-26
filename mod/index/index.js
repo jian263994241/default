@@ -1,4 +1,3 @@
-require('./style.less');
 var tpl = require('./index.tpl.html');
 var tplFn = Template7.compile(tpl);
 
