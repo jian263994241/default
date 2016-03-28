@@ -8,7 +8,6 @@
 
 - /mod/index/index.tpl.html  index 动态模块 pack时并入 main.js
 
-- /mod/index/index.less  index 模块样式 require 调用
 
 #### /page - Ajax page
 
