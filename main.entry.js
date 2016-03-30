@@ -1,10 +1,7 @@
-var customModalTpl = require('./mod/common/color.modal.html');
-
 window.$$ = Dom7;
 window.app = new Framework7({
   // pushState: true,
-  template7Pages: true,
-  modalTemplate:customModalTpl
+  template7Pages: true
 });
 
 window.viewMain = app.addView('.view-main');
