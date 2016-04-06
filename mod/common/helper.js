@@ -23,7 +23,7 @@ var modalWait = {
 var btnCountdown = function(btn, s) {
   btn.addClass('disabled');
   var s = s || 60;
-  btn.html(s-- + 's后重新发送');
+  btn.html(s-- + 's后重发');
   SMStimer = setInterval(function() {
     if (s == 0) {
       clearInterval(SMStimer);
@@ -31,7 +31,7 @@ var btnCountdown = function(btn, s) {
       btn.html(btn.data('text'));
       return;
     }
-    btn.html(s-- + 's后重新发送');
+    btn.html(s-- + 's后重发');
   }, 1000);
   return btn;
 };
