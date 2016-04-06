@@ -28,6 +28,6 @@
 
 ## 编译
 
-- `c release qa` - 编译
-- `c release op` - 编译&压缩
-- `c release md5` - 编译&压缩&md5
+- `c release build` - 编译
+- `c release dist` - 编译&压缩
+- `c release prod` - 编译&压缩&md5
