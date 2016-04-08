@@ -1,6 +1,6 @@
 var baseUrl = 'http://192.168.47.40:8128/app-loan-website';
 
-var contentType = 'application/json;chartset=UTF-8';
+var contentType = 'application/json;charset=UTF-8';
 
 module.exports = {
   getData: function(data, callback) {
