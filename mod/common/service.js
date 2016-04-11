@@ -1,4 +1,4 @@
-var baseUrl = 'http://192.168.47.40:8128/app-loan-website';
+var baseUrl = 'https://ebd.99bill.com/coc-bill-api';
 
 module.exports = {
   getData: function(data, callback) {
