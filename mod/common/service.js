@@ -22,8 +22,8 @@ module.exports = {
       url: url,
       method: 'GET',
       headers: {
-					"Content-type":"application/json;charset=UTF-8"
-			},
+				"Content-type":"application/json;charset=UTF-8"
+      },
       dataType: 'json',
       data: data,
       success: function(data) {
