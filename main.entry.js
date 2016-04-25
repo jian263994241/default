@@ -1,24 +1,30 @@
-window.$$ = Dom7;
-window.app = new Framework7({
-  // pushState: true,
-  template7Pages: true
-});
+var MOD;
 
-window.viewMain = app.addView('.view-main');
+  MOD = {
+    welcome: require("./mod/bindCard/welcome")
+  };
 
-var mod = {};
+  window.$$ = Dom7;
 
-mod.index = require('./mod/index/index');
+  window.app = new Framework7({
+    pushState: true,
+    template7Pages: true,
+    init: false,
+    onPageInit: function(app, page) {
+      if (MOD[page.name]) {
+        return MOD[page.name](app, page);
+      }
+    },
+    onAjaxStart: function() {
+      return app.showIndicator();
+    },
+    onAjaxComplete: function() {
+      return app.hideIndicator();
+    }
+  });
 
+  app.session = require('./mod/common/session');
 
-$$(document).on('pageInit', function(e){
-  var page = e.detail.page;
-  document.title = $$(page.container).data('title');
-  mod[page.name] && mod[page.name].init(page);
-});
+  window.mainView = app.addView('.view-main');
 
-viewMain.router.load({
-  url: 'page/index.html',
-  animatePages: false,
-  pushState:false
-});
+  app.init();
