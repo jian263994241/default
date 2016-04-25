@@ -32,7 +32,7 @@ var Mock, api, baseUrl, get, key, post, value;
       headers: headers,
       success: function(data) {
         data = JSON.parse(data);
-        console.log(data);
+        console.log(url, data);
         if (data.errCode === "00") {
           return cb(data);
         } else {
@@ -60,7 +60,7 @@ var Mock, api, baseUrl, get, key, post, value;
       headers: headers,
       success: function(data) {
         data = JSON.parse(data);
-        console.log(data);
+        console.log(url, data);
         if (data.errCode === "00") {
           return cb(data);
         } else {
