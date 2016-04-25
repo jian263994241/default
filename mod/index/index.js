@@ -1,16 +1,12 @@
 var tpl = require('./index.tpl.html');
 var tplFn = Template7.compile(tpl);
 
-module.exports = {
-  init: function(page) {
-    var qurey = $$.parseUrlQuery(location.href);
-    var p = this;
-    p.container = $$(page.container);
+var helper, service;
 
-    p.bind(p.container);
-  },
-  bind: function($root) {
-    var html = tplFn({name:'word'});
-    $root.find('.page-content').html(html);
-  }
+service = require("../common/service");
+helper = require("../common/helper");
+
+module.exports = function(app, page) {
+  var container;
+  container = $$(page.container);
 }
