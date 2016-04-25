@@ -11,15 +11,5 @@ module.exports = {
   },
   valiMoblie: function(param) {
     return /^[0-9]{11}$/.test(param);
-  },
-  valiValidateCode: function(param) {
-    return /^[\s\S]{4}$/.test(param);
-  },
-  valiNumber: function(str, n) {
-    var regex = new RegExp("^[0-9]{" + (n - 1) + "}[Xx0-9]{1}$");
-    return regex.test(str);
-  },
-  valiNULL: function(str) {
-    return str != '';
   }
 }
