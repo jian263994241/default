@@ -1,7 +1,8 @@
 var MOD;
 
   MOD = {
-    welcome: require("./mod/bindCard/welcome")
+    welcome: require("./mod/welcome"),
+    index: require("./mod/index/index")
   };
 
   window.$$ = Dom7;
