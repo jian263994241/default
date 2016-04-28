@@ -18,60 +18,61 @@ var Mock, api, baseUrl, get, key, post, value;
     api[key] = baseUrl + value;
   }
 
-  get = function(url, data, headers, cb) {
-    if (data == null) {
-      data = {};
-    }
-    if (headers == null) {
-      headers = {};
-    }
-    return $$.ajax({
-      url: url,
-      method: "GET",
-      data: data,
-      headers: headers,
-      success: function(data) {
-        data = JSON.parse(data);
-        console.log(url, data);
-        if (data.errCode === "00") {
-          return cb(data);
-        } else {
-          return app.alert(data.errMsg);
-        }
-      },
-      error: function(xhr, status) {
-        return app.alert("请求异常: " + status);
+ get = function(url, data, headers, cb) {
+  var ajaxOpt;
+  ajaxOpt = {
+    url: url,
+    method: "GET",
+    contentType: "application/json;charset=UTF-8",
+    success: function(data) {
+      data = JSON.parse(data);
+      console.log(url, data);
+      if (data.errCode === "00") {
+        return cb(data);
+      } else {
+        return app.alert(data.errMsg);
       }
-    });
+    },
+    error: function(xhr, status) {
+      return app.alert("请求异常: " + status);
+    }
   };
+  if (data != null) {
+    ajaxOpt.data = JSON.stringify(data);
+  }
+  if (headers != null) {
+    ajaxOpt.headers = headers;
+  }
+  return $$.ajax(ajaxOpt);
+};
 
-  post = function(url, data, headers, cb) {
-    if (data == null) {
-      data = {};
-    }
-    if (headers == null) {
-      headers = {};
-    }
-    return $$.ajax({
-      url: url,
-      method: "POST",
-      data: JSON.stringify(data),
-      contentType: "application/json;charset=UTF-8",
-      headers: headers,
-      success: function(data) {
-        data = JSON.parse(data);
-        console.log(url, data);
-        if (data.errCode === "00") {
-          return cb(data);
-        } else {
-          return app.alert(data.errMsg);
-        }
-      },
-      error: function(xhr, status) {
-        return app.alert("请求异常: " + status);
+post = function(url, data, headers, cb) {
+  var ajaxOpt;
+  ajaxOpt = {
+    url: url,
+    method: "POST",
+    contentType: "application/json;charset=UTF-8",
+    success: function(data) {
+      data = JSON.parse(data);
+      console.log(url, data);
+      if (data.errCode === "00") {
+        return cb(data);
+      } else {
+        return app.alert(data.errMsg);
       }
-    });
+    },
+    error: function(xhr, status) {
+      return app.alert("请求异常: " + status);
+    }
   };
+  if (data != null) {
+    ajaxOpt.data = JSON.stringify(data);
+  }
+  if (headers != null) {
+    ajaxOpt.headers = headers;
+  }
+  return $$.ajax(ajaxOpt);
+};
 module.exports = {
  cardBin: function(cardNo, callback) {
     return get(api.cardBin + encryptByDES(cardNo), null, null, callback);
