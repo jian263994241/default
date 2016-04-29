@@ -18,12 +18,14 @@ var Mock, api, baseUrl, get, key, post, value;
     api[key] = baseUrl + value;
   }
 
- get = function(url, data, headers, cb) {
+ get = function(url, data, headers, cb, postJSON) {
   var ajaxOpt;
+  if (postJSON == null) {
+    postJSON = false;
+  }
   ajaxOpt = {
     url: url,
     method: "GET",
-    contentType: "application/json;charset=UTF-8",
     success: function(data) {
       data = JSON.parse(data);
       console.log(url, data);
@@ -37,13 +39,19 @@ var Mock, api, baseUrl, get, key, post, value;
       return app.alert("请求异常: " + status);
     }
   };
-  if (data != null) {
-    ajaxOpt.data = JSON.stringify(data);
+  if (postJSON) {
+    ajaxOpt.contentType = "application/json;charset=UTF-8";
+    if (data != null) {
+      ajaxOpt.data = JSON.stringify(data);
+    }
+  } else {
+    if (data != null) {
+      ajaxOpt.data = data;
+    }
   }
   if (headers != null) {
-    ajaxOpt.headers = headers;
+    return ajaxOpt.headers = headers;
   }
-  return $$.ajax(ajaxOpt);
 };
 
 post = function(url, data, headers, cb) {
