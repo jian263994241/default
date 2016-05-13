@@ -51,4 +51,4 @@ module.exports = {
   session: copy(sessionStorage, base),
   local: copy(localStorage, base)
 };
-RunLink
+
