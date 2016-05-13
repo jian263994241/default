@@ -1,3 +1,5 @@
+var ua = window.navigator.userAgent.toLowerCase();
+
 module.exports = {
   // 验证登录密码 前提已满足只有特殊字符 字母和数字
   valiPassword: function(param) {
@@ -25,27 +27,61 @@ module.exports = {
     }, 1000);
     return btn;
   },
-  findPosition: function(oElement){
+  isWeixin: function() {
+    return Boolean(ua.match(/MicroMessenger/i) == 'micromessenger');
+  },
+  isAndroid: function() {
+    return (ua.indexOf('android') > -1 || ua.indexOf('linux') > -1)
+  },
+  isIOS: function() {
+    return (ua.indexOf('iphone') > -1 || ua.indexOf('mac') > -1);
+  },
+  findPosition: function(oElement) {
     var x2 = 0;
     var y2 = 0;
     var width = oElement.offsetWidth;
     var height = oElement.offsetHeight;
 
-    if( typeof( oElement.offsetParent ) != 'undefined' )
-    {
-      for( var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent )
-      {
+    if (typeof(oElement.offsetParent) != 'undefined') {
+      for (var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent) {
         posX += oElement.offsetLeft;
         posY += oElement.offsetTop;
       }
       x2 = posX + width;
       y2 = posY + height;
-      return [ posX, posY ,x2, y2];
+      return [posX, posY, x2, y2];
 
-      } else{
-        x2 = oElement.x + width;
-        y2 = oElement.y + height;
-        return [ oElement.x, oElement.y, x2, y2];
+    } else {
+      x2 = oElement.x + width;
+      y2 = oElement.y + height;
+      return [oElement.x, oElement.y, x2, y2];
     }
+  },
+  androidFix: function() {
+    var _this = this;
+    if(!_this.isAndroid()) return ;
+
+    var focTime, pos;
+
+    focTime = null;
+
+    pos = null;
+
+    $$(document).on("focusin", "input", function(e) {
+      var $content;
+      clearTimeout(focTime);
+      pos = _this.findPosition(e.target);
+      $content = $$('.page-content');
+      $content.css("padding-bottom", pos[3] + "px");
+      return $content.scrollTop(pos[1] - $$(window).height() / 2 + 44, 400);
+    });
+
+    $$(document).on("focusout", "input", function(e) {
+      return focTime = setTimeout((function() {
+        var $content;
+        $content = $$('.page-content');
+        return $$('.page-content').css('padding-bottom', 0 + "px");
+      }), 300);
+    });
   }
 }
