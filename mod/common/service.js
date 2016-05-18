@@ -28,6 +28,7 @@ var Mock, api, baseUrl, get, key, post, value;
     method: "GET",
     success: function(data) {
       data = JSON.parse(data);
+      app.hideIndicator();
       console.log(url, data);
       if (data.errCode === "00") {
         return cb(data);
@@ -36,6 +37,7 @@ var Mock, api, baseUrl, get, key, post, value;
       }
     },
     error: function(xhr, status) {
+      app.hideIndicator();
       return app.alert("请求异常: " + status);
     }
   };
@@ -50,8 +52,10 @@ var Mock, api, baseUrl, get, key, post, value;
     }
   }
   if (headers != null) {
-    return ajaxOpt.headers = headers;
+    ajaxOpt.headers = headers;
   }
+  app.showIndicator();
+  return $$.ajax(ajaxOpt);
 };
 
 post = function(url, data, headers, cb) {
