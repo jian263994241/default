@@ -73,7 +73,7 @@ module.exports = {
       pos = _this.findPosition(e.target);
       $content = $$('.page-content');
       $content.css("padding-bottom", pos[3] + "px");
-      return $content.scrollTop(pos[1] - $$(window).height() / 2 + 44, 400);
+      return $content.scrollTop(pos[1] - $$(window).height() / 2 + 44, 0);
     });
 
     $$(document).on("focusout", "input", function(e) {
@@ -83,5 +83,11 @@ module.exports = {
         return $$('.page-content').css('padding-bottom', 0 + "px");
       }), 300);
     });
+  },
+  inputMaxLength:function(input,maxLength){
+    $$(input).on('input',function(e){
+        e.target.value = e.target.value.slice(0,maxLength)
+    });
   }
+
 }
