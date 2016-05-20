@@ -36,6 +36,17 @@ module.exports = {
   isIOS: function() {
     return (ua.indexOf('iphone') > -1 || ua.indexOf('mac') > -1);
   },
+  appType: function() {
+    if (this.isIOS()) {
+      return "IOS"
+    } else if (this.isAndroid()) {
+      return "android"
+    } else if (this.isWeixin()) {
+      return 'wx'
+    } else {
+      return 'other'
+    }
+  },
   findPosition: function(oElement) {
     var x2 = 0;
     var y2 = 0;
@@ -59,7 +70,7 @@ module.exports = {
   },
   androidFix: function() {
     var _this = this;
-    if(!_this.isAndroid()) return ;
+    if (!_this.isAndroid()) return;
 
     var focTime, pos;
 
@@ -84,9 +95,9 @@ module.exports = {
       }), 300);
     });
   },
-  inputMaxLength:function(input,maxLength){
-    $$(input).on('input',function(e){
-        e.target.value = e.target.value.slice(0,maxLength)
+  inputMaxLength: function(input, maxLength) {
+    $$(input).on('input', function(e) {
+      e.target.value = e.target.value.slice(0, maxLength)
     });
   }
 
