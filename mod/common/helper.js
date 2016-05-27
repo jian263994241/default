@@ -36,13 +36,18 @@ module.exports = {
   isIOS: function() {
     return (ua.indexOf('iphone') > -1 || ua.indexOf('mac') > -1);
   },
+  isKuaiQianBao: function() {
+    return (ua.indexOf('kuaiqianbao') > -1);
+  },
+  getAppVersion:function(){
+    ua.match(/kuaiqianbao\/([1-9.]+)/)
+    return RegExp.$1 ;
+  },
   appType: function() {
     if (this.isIOS()) {
       return "IOS"
     } else if (this.isAndroid()) {
       return "android"
-    } else if (this.isWeixin()) {
-      return 'wx'
     } else {
       return 'other'
     }
