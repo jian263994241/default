@@ -18,10 +18,13 @@ var Mock, api, baseUrl, get, key, post, value;
     api[key] = baseUrl + value;
   }
 
- get = function(url, data, headers, cb, postJSON) {
+ get = function(url, data, headers, cb, postJSON, timeoutCall) {
   var ajaxOpt;
   if (postJSON == null) {
     postJSON = false;
+  }
+  if (timeoutCall == null) {
+    timeoutCall = function() {};
   }
   ajaxOpt = {
     url: url,
@@ -33,12 +36,16 @@ var Mock, api, baseUrl, get, key, post, value;
       if (data.errCode === "00") {
         return cb(data);
       } else {
-        return app.alert(data.errMsg);
+        return app.alert("[" + data.errCode + "]" + data.errMsg);
       }
     },
     error: function(xhr, status) {
       app.hideIndicator();
-      return app.alert("请求异常: " + status);
+      if (status === "timeout") {
+        return timeoutCall();
+      } else {
+        return app.alert("请求异常: " + url + "[" + status + "]");
+      }
     }
   };
   if (postJSON) {
@@ -58,23 +65,32 @@ var Mock, api, baseUrl, get, key, post, value;
   return $$.ajax(ajaxOpt);
 };
 
-post = function(url, data, headers, cb) {
+post = function(url, data, headers, cb, timeoutCall) {
   var ajaxOpt;
+  if (timeoutCall == null) {
+    timeoutCall = function() {};
+  }
   ajaxOpt = {
     url: url,
     method: "POST",
     contentType: "application/json;charset=UTF-8",
     success: function(data) {
       data = JSON.parse(data);
+      app.hideIndicator();
       console.log(url, data);
       if (data.errCode === "00") {
         return cb(data);
       } else {
-        return app.alert(data.errMsg);
+        return app.alert("[" + data.errCode + "]" + data.errMsg);
       }
     },
     error: function(xhr, status) {
-      return app.alert("请求异常: " + status);
+      app.hideIndicator();
+      if (status === "timeout") {
+        return timeoutCall();
+      } else {
+        return app.alert("请求异常: " + url + "[" + status + "]");
+      }
     }
   };
   if (data != null) {
@@ -83,6 +99,7 @@ post = function(url, data, headers, cb) {
   if (headers != null) {
     ajaxOpt.headers = headers;
   }
+  app.showIndicator();
   return $$.ajax(ajaxOpt);
 };
 module.exports = {
