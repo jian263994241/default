@@ -44,7 +44,7 @@ var Mock, api, baseUrl, get, key, post, value;
       if (status === "timeout") {
         return timeoutCall();
       } else {
-        return app.alert("请求异常: " + url + "[" + status + "]");
+        return app.alert("请求异常: " + "[" + status + "]" + url );
       }
     }
   };
