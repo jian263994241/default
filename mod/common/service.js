@@ -112,6 +112,26 @@ module.exports = {
       return get(api.userInfo, null, {
         Authorization: loginToken
       }, callback);
- }
+ },
+ appAuth: function(callback){
+    var accessToken, deviceId, url,error;
+    url = "https://ebd.99bill.com/coc-bill-api/1.0/app/auth"
+    error = function(res){
+      alert(JSON.stringify(res));
+    };
+    kuaiqian.getAccessToken({
+      success:function(res){
+        accessToken = res.accessToken;
+        kuaiqian.getDeviceId({
+          success:function(res){
+            deviceId = res.deviceId;
+            post(url, {accessToken:encodeURIComponent(accessToken),deviceId:deviceId}, null, callback );
+          },
+          error: error
+        })
+      },
+      error: error
+    });
+  }
   
 }
