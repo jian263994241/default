@@ -24,7 +24,7 @@ var Mock, api, baseUrl, get, key, post, value;
     postJSON = false;
   }
   if (timeoutCall == null) {
-    timeoutCall = function() {alert('请求超时')};
+    timeoutCall = function() {alert('网络超时')};
   }
   ajaxOpt = {
     url: url,
@@ -69,7 +69,7 @@ var Mock, api, baseUrl, get, key, post, value;
 post = function(url, data, headers, cb, timeoutCall) {
   var ajaxOpt;
   if (timeoutCall == null) {
-    timeoutCall = function() {alert('请求超时')};
+    timeoutCall = function() {alert('网络超时')};
   }
   ajaxOpt = {
     url: url,
