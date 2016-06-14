@@ -24,11 +24,12 @@ var Mock, api, baseUrl, get, key, post, value;
     postJSON = false;
   }
   if (timeoutCall == null) {
-    timeoutCall = function() {};
+    timeoutCall = function() {alert('请求超时')};
   }
   ajaxOpt = {
     url: url,
     method: "GET",
+    timeout: 1000 * 60,
     success: function(data) {
       data = JSON.parse(data);
       app.hideIndicator();
@@ -68,12 +69,13 @@ var Mock, api, baseUrl, get, key, post, value;
 post = function(url, data, headers, cb, timeoutCall) {
   var ajaxOpt;
   if (timeoutCall == null) {
-    timeoutCall = function() {};
+    timeoutCall = function() {alert('请求超时')};
   }
   ajaxOpt = {
     url: url,
     method: "POST",
     contentType: "application/json;charset=UTF-8",
+    timeout: 1000 * 60,
     success: function(data) {
       data = JSON.parse(data);
       app.hideIndicator();
