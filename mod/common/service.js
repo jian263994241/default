@@ -51,7 +51,7 @@ var ajax = function(options) {
     }
   };
   if (opt.data) {
-    if (opt.postJSON) {
+    if (opt.contentJSON) {
       ajaxOpt.contentType = "application/json;charset=UTF-8";
       ajaxOpt.data = JSON.stringify(opt.data);
     } else {
