@@ -72,35 +72,6 @@ ajax = function(options) {
 
 module.exports = {
   
- //钱包内获取loginToken
- appAuth: function(callback){
-    var accessToken, deviceId, url,error;
-    url = "https://ebd.99bill.com/coc-bill-api/1.0/app/auth"
-    error = function(res){
-      alert(JSON.stringify(res));
-    };
-    kuaiqian.getAccessToken({
-      success:function(res){
-        accessToken = res.accessToken;
-        kuaiqian.getDeviceId({
-          success:function(res){
-            deviceId = res.deviceId;
-            ajax({
-              url: url,
-              method: 'POST',
-              contentJSON: true,
-              data: {
-                accessToken: encodeURIComponent(accessToken),
-                deviceId: deviceId
-              },
-              callback: callback
-            });
-          },
-          error: error
-        })
-      },
-      error: error
-    });
-  }
+ 
   
 }
