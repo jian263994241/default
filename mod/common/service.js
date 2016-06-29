@@ -1,4 +1,4 @@
-var util = require('util');
+
 var baseUrl = "https://ebd.99bill.com/coc-bill-api";
 
 api = {
@@ -13,46 +13,51 @@ for (key in api) {
  /*
  * opt {url, method, timeout ,data, headers, contentJSON ,callback, timeoutCall}
  */
-var ajax = function(options) {
-  // 默认值
-  var opt = util._extend({
+var ajax, util;
+
+util = require('util');
+
+ajax = function(options) {
+  var ajaxOpt, opt;
+  opt = util._extend({
     url: '',
     method: 'GET',
     data: null,
     headers: null,
     timeout: 1000 * 60,
     contentJSON: false,
+    showPreloader: true,
     callback: function() {},
     timeoutCall: function() {
       alert('网络超时');
     }
   }, options);
-  var ajaxOpt = {
+  ajaxOpt = {
     url: opt.url,
     method: opt.method,
     timeout: opt.timeout,
     success: function(data) {
       data = JSON.parse(data);
-      app.hideIndicator();
+      opt.showPreloader && app.hidePreloader();
       console.log(opt.url, data);
-      if (data.errCode === "00") {
+      if (data.errCode === '00') {
         return opt.callback(data);
       } else {
-        return app.alert("[" + data.errCode + "]" + data.errMsg);
+        return app.alert('[' + data.errCode + ']' + data.errMsg);
       }
     },
     error: function(xhr, status) {
-      app.hideIndicator();
-      if (status === "timeout") {
+      opt.showPreloader && app.hidePreloader();
+      if (status === 'timeout') {
         return opt.timeoutCall();
       } else {
-        return app.alert("请求异常: " + "[" + status + "]" + opt.url);
+        return app.alert('请求异常: ' + '[' + status + ']' + opt.url);
       }
     }
   };
   if (opt.data) {
     if (opt.contentJSON) {
-      ajaxOpt.contentType = "application/json;charset=UTF-8";
+      ajaxOpt.contentType = 'application/json;charset=UTF-8';
       ajaxOpt.data = JSON.stringify(opt.data);
     } else {
       ajaxOpt.data = opt.data;
@@ -61,7 +66,7 @@ var ajax = function(options) {
   if (opt.headers) {
     ajaxOpt.headers = opt.headers;
   }
-  app.showIndicator();
+  opt.showPreloader && app.showPreloader();
   return Dom7.ajax(ajaxOpt);
 };
 
