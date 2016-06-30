@@ -82,7 +82,7 @@ module.exports = function(app) {
               var deviceId;
               deviceId = res.deviceId;
               return post(url, {
-                accessToken:decodeURIComponent(encodeURIComponent(accessToken)),
+                accessToken:encodeURIComponent(decodeURIComponent(accessToken)),
                 deviceId: deviceId
               }, null, callback);
             },
