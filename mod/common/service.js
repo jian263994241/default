@@ -1,12 +1,5 @@
 
-// var baseUrl = "https://ebd.99bill.com/coc-bill-api";
-
-if(location.origin.indexOf('sandbox.99bill') == -1 ){
-    ebdoOrigin = "ebd.99bill.com";
-}else{
-    ebdoOrigin = "101.227.69.165"
-}
-var baseUrl = "https://" + ebdoOrigin + "/coc-bill-api";
+var baseUrl = "https://ebd.99bill.com/coc-bill-api";
 
 api = {
   validateCode: "/1.0/sms/validateCode"
