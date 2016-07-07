@@ -105,7 +105,7 @@ module.exports = {
   },
   inputMaxLength: function(input, maxLength) {
     $$(input).on('input', function(e) {
-      e.target.value = maxLength(e.target.value)
+      e.target.value = maxLength(e.target.value, maxLength)
     });
   }
 
