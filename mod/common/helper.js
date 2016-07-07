@@ -100,9 +100,12 @@ module.exports = {
       }), 300);
     });
   },
+  maxLength: function(value, maxLength) {
+    return value.slice(0, maxLength);
+  },
   inputMaxLength: function(input, maxLength) {
     $$(input).on('input', function(e) {
-      e.target.value = e.target.value.slice(0, maxLength)
+      e.target.value = maxLength(e.target.value)
     });
   }
 
