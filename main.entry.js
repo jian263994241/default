@@ -8,19 +8,13 @@ MOD = {
 window.$$ = Dom7;
 
 window.app = new Framework7({
-  pushState: true,
+  pushState: false,
   template7Pages: true,
   init: false,
   onPageInit: function(app, page) {
     if (MOD[page.name]) {
       return MOD[page.name](app, page);
     }
-  },
-  onAjaxStart: function() {
-    return app.showIndicator();
-  },
-  onAjaxComplete: function() {
-    return app.hideIndicator();
   }
 });
 
