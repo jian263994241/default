@@ -2,7 +2,7 @@
 var baseUrl = "https://ebd.99bill.com/coc-bill-api";
 
 api = {
-  validateCode: "/1.0/sms/validateCode"
+  banks: "/1.0/banks"
 };
 
 for (key in api) {
@@ -10,68 +10,63 @@ for (key in api) {
   api[key] = baseUrl + value;
 }
 
- /*
- * opt {url, method, timeout ,data, headers, contentJSON ,callback, timeoutCall}
- */
-var ajax, util;
+function method(type, opt, loginToken) {
 
-util = require('util');
-
-ajax = function(options) {
-  var ajaxOpt, opt;
-  opt = util._extend({
-    url: '',
-    method: 'GET',
-    data: null,
-    headers: null,
-    timeout: 1000 * 60,
-    contentJSON: false,
-    showPreloader: true,
-    callback: function() {},
-    timeoutCall: function() {
-      alert('网络超时');
-    }
-  }, options);
-  ajaxOpt = {
+  var type = type.toLocaleUpperCase();
+  var ajaxOpt = {
     url: opt.url,
-    method: opt.method,
-    timeout: opt.timeout,
-    success: function(data) {
-      data = JSON.parse(data);
-      opt.showPreloader && app.hidePreloader();
-      console.log(opt.url, data);
-      if (data.errCode === '00') {
-        return opt.callback(data);
-      } else {
-        return app.alert('[' + data.errCode + ']' + data.errMsg);
-      }
-    },
-    error: function(xhr, status) {
-      opt.showPreloader && app.hidePreloader();
-      if (status === 'timeout') {
-        return opt.timeoutCall();
-      } else {
-        return app.alert('请求异常: ' + '[' + status + ']' + opt.url);
-      }
-    }
+    method: "GET",
+    success: successHandle,
+    error: errorHandle
   };
   if (opt.data) {
-    if (opt.contentJSON) {
+    if (type === "POST") {
       ajaxOpt.contentType = 'application/json;charset=UTF-8';
       ajaxOpt.data = JSON.stringify(opt.data);
     } else {
       ajaxOpt.data = opt.data;
     }
   }
-  if (opt.headers) {
-    ajaxOpt.headers = opt.headers;
+  if (loginToken) {
+    ajaxOpt.headers = {
+      Authorization: loginToken
+    }
   }
-  opt.showPreloader && app.showPreloader();
+
+  function successHandle(data) {
+    data = JSON.parse(data);
+    console.log(opt.url, data);
+    app.hidePreloader();
+    if (data.errCode === '00') {
+      return opt.callback(data);
+    } else {
+      return app.toast('[' + data.errCode + ']' + data.errMsg);
+    }
+  };
+
+  function errorHandle(xhr, status) {
+    app.hidePreloader();
+    if (status === 'timeout') {
+      return opt.timeoutCall();
+    } else {
+      return app.toast('网络异常: ' + '[' + status + ']' + opt.url);
+    }
+  }
+
   return Dom7.ajax(ajaxOpt);
-};
+}
 
 module.exports = {
   
- 
+  banks: function(callback) {
+    app.showPreloader();
+    method('get', {
+      url: api.banks,
+      data: {
+        bankChannel: 1
+      },
+      callback: callback
+    })
+  }
   
 }
