@@ -15,7 +15,7 @@ function method(type, opt, loginToken) {
   var type = type.toLocaleUpperCase();
   var ajaxOpt = {
     url: opt.url,
-    method: "GET",
+    method: type,
     success: successHandle,
     error: errorHandle
   };
