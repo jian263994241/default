@@ -34,12 +34,9 @@ function method(type, opt, loginToken) {
 
   function errorHandle(xhr, status) {
     app.hidePreloader();
-    if (status === 'timeout') {
-      return opt.timeoutCall();
-    } else {
-      return app.toast('网络异常: ' + '[' + status + ']' + opt.url);
-    }
+    return app.alert('[' + status + ']请求异常' + opt.url);
   }
+
 
   return Dom7.ajax(ajaxOpt);
 }
