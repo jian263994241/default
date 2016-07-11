@@ -28,7 +28,7 @@ function method(type, opt, loginToken) {
     if (data.errCode === '00') {
       return opt.callback(data);
     } else {
-      return app.alert('[' + data.errCode + ']' + data.errMsg + opt.url);
+      return app.alert(data.errMsg);
     }
   };
 
