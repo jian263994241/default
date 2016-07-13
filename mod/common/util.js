@@ -27,30 +27,19 @@ module.exports = {
     }, 1000);
     return btn;
   },
-  isWeixin: function() {
-    return Boolean(ua.match(/MicroMessenger/i) == 'micromessenger');
-  },
-  isAndroid: function() {
-    return (ua.indexOf('android') > -1 || ua.indexOf('linux') > -1)
-  },
-  isIOS: function() {
-    return (ua.indexOf('iphone') > -1 || ua.indexOf('mac') > -1);
-  },
-  isKuaiQianBao: function() {
-    return (ua.indexOf('kuaiqianbao') > -1);
-  },
+  env:function() {
+    var ua = navigator.userAgent.toLowerCase();
+    return {
+      isWeixin:ua.match(/MicroMessenger/i) == 'micromessenger',
+      iOS: ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1 || ua.indexOf('ipod') > -1,
+      Android: ua.indexOf('android') > -1,
+      KQ: ua.indexOf('kuaiqianbao') > -1,
+      FeiFan: ua.indexOf('feifan') > -1
+    };
+  }(),
   getAppVersion:function(){
     ua.match(/kuaiqianbao\/([1-9.]+)/)
     return RegExp.$1 ;
-  },
-  appType: function() {
-    if (this.isIOS()) {
-      return "IOS"
-    } else if (this.isAndroid()) {
-      return "android"
-    } else {
-      return 'other'
-    }
   },
   findPosition: function(oElement) {
     var x2 = 0;
