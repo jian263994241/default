@@ -27,19 +27,9 @@ module.exports = {
     }, 1000);
     return btn;
   },
-  env:function() {
-    var ua = navigator.userAgent.toLowerCase();
-    return {
-      isWeixin:ua.match(/MicroMessenger/i) == 'micromessenger',
-      iOS: ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1 || ua.indexOf('ipod') > -1,
-      Android: ua.indexOf('android') > -1,
-      KQ: ua.indexOf('kuaiqianbao') > -1,
-      FeiFan: ua.indexOf('feifan') > -1
-    };
-  }(),
-  getAppVersion:function(){
+  getAppVersion: function() {
     ua.match(/kuaiqianbao\/([1-9.]+)/)
-    return RegExp.$1 ;
+    return RegExp.$1;
   },
   findPosition: function(oElement) {
     var x2 = 0;
