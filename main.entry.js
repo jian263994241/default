@@ -35,7 +35,8 @@ window.mainView = app.addView('.view-main', {
 
 mainView.router.load({
   pageName: 'index',
-  pushState: false
+  pushState: false,
+  animatePages: false
 });
 
 //测试用
