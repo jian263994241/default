@@ -1,6 +1,6 @@
 var service = require("../common/service");
 
-var Index = React.createClass({
+var Page = React.createClass({
   getInitialState: function() {
     return {
       password: ""
@@ -60,5 +60,5 @@ var Index = React.createClass({
 module.exports = function(app, page) {
   var container = page.container;
 
-  ReactDOM.render( < Index / > , container);
+  ReactDOM.render( <Page /> , container);
 }
