@@ -1,5 +1,5 @@
 module.exports = function(app) {
-  var get, isKuaiQianBao, isWeixin, post, ua;
+  var isKuaiQianBao, isWeixin, ua;
   ua = window.navigator.userAgent.toLowerCase();
   isKuaiQianBao = function() {
     return Boolean(ua.indexOf('kuaiqianbao') > -1);
@@ -81,10 +81,15 @@ module.exports = function(app) {
             success: function(res) {
               var deviceId;
               deviceId = res.deviceId;
-              return post(url, {
-                accessToken:encodeURIComponent(decodeURIComponent(accessToken)),
-                deviceId: deviceId
-              }, null, callback);
+              app.showPreloader();
+              method('post', {
+                url: url,
+                data: {
+                  accessToken: encodeURIComponent(decodeURIComponent(accessToken)),
+                  deviceId: deviceId
+                },
+                callback: callback
+              });
             },
             error: error
           });
@@ -95,21 +100,30 @@ module.exports = function(app) {
     outAuth: function(verifyCode, callback) {
       var url;
       url = "https://ebd.99bill.com/coc-bill-api/1.0/billApi/auth";
-      return post(url, {
-        verifyCode: verifyCode
-      }, null, callback);
+      app.showPreloader();
+      method('post', {
+        url: url,
+        data: {
+          verifyCode: verifyCode
+        },
+        callback: callback
+      });
     },
     wxAuth: function(code, callback) {
       var url;
       url = "https://ebd.99bill.com/1.0/oauth2/oauthInfo/";
-      return get(url + code, null, null, callback);
+      app.showPreloader();
+      method('get', {
+        url: url + code,
+        callback: callback
+      });
     },
     login: function(callback) {
       var loginToken, next, urlQuery;
-      loginToken = sessionStorage.getItem("loginToken");
+      loginToken = window.sessionStorage.getItem("loginToken");
       urlQuery = Dom7.parseUrlQuery(location.search);
       next = function(data) {
-        sessionStorage.setItem(data.loginToken);
+        window.sessionStorage.setItem('loginToken', data.loginToken);
         return callback(data.loginToken);
       };
       if (loginToken) {
@@ -126,3 +140,45 @@ module.exports = function(app) {
     }
   };
 };
+
+function method(type, opt, loginToken) {
+
+  var type = type.toLocaleUpperCase();
+  var ajaxOpt = {
+    url: opt.url,
+    method: type,
+    success: successHandle,
+    error: errorHandle
+  };
+  if (opt.data) {
+    if (type === "POST") {
+      ajaxOpt.contentType = 'application/json;charset=UTF-8';
+      ajaxOpt.data = JSON.stringify(opt.data);
+    } else {
+      ajaxOpt.data = opt.data;
+    }
+  }
+  if (loginToken) {
+    ajaxOpt.headers = {
+      Authorization: loginToken
+    }
+  }
+
+  function successHandle(data) {
+    data = JSON.parse(data);
+    console.log(opt.url, data);
+    app.hidePreloader();
+    if (data.errCode === '00') {
+      return opt.callback(data);
+    } else {
+      return app.alert(data.errMsg);
+    }
+  };
+
+  function errorHandle(xhr, status) {
+    app.hidePreloader();
+    return app.alert('[' + status + ']请求异常' + opt.url);
+  }
+
+  return Dom7.ajax(ajaxOpt);
+}
