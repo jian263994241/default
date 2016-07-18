@@ -121,7 +121,7 @@ module.exports = function(app) {
       } else if (urlQuery.verifyCode) {
         return this.outAuth(urlQuery.verifyCode, next);
       } else {
-        return app.alert("\u73af\u5883\u4e0d\u652f\u6301\u002c\u8bf7\u624b\u52a8\u83b7\u53d6loginToken");
+        return app.alert("未登录,请登录后再试");
       }
     }
   };
