@@ -79,8 +79,7 @@ module.exports = function(app) {
 };
 
 function method(type, opt, loginToken) {
-
-  var type = type.toLocaleUpperCase();
+  type = type.toLocaleUpperCase();
   var ajaxOpt = {
     url: opt.url,
     method: type,
