@@ -9,7 +9,7 @@ window.$$ = Dom7;
 window.app = new Framework7({
   // pushState: true,
   swipeBackPage: false,
-  onPageInit: function(app, page) {
+  onPageBeforeInit: function(app, page) {
     if (MOD[page.name]) {
       return MOD[page.name](app, page);
     }
