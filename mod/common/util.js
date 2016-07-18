@@ -27,6 +27,14 @@ module.exports = {
     }, 1000);
     return btn;
   },
+  setTitle: function(){
+    document.title = title;
+    try {
+      kuaiqian.setPageTitle({
+        title: title
+      });
+    } catch (e) {}
+  },
   env: function() {
     var ua = navigator.userAgent.toLowerCase();
     return {
