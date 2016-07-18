@@ -1,5 +1,5 @@
 module.exports = function(app) {
-  var isKuaiQianBao, isWeixin, ua;
+  var get, isKuaiQianBao, isWeixin, post, ua;
   ua = window.navigator.userAgent.toLowerCase();
   isKuaiQianBao = function() {
     return Boolean(ua.indexOf('kuaiqianbao') > -1);
@@ -7,65 +7,7 @@ module.exports = function(app) {
   isWeixin = function() {
     return Boolean(ua.match(/MicroMessenger/i) === 'micromessenger');
   };
-  post = function(url, data, headers, cb) {
-    var ajaxOpt;
-    ajaxOpt = {
-      url: url,
-      method: "POST",
-      contentType: "application/json;charset=UTF-8",
-      success: function(data) {
-        data = JSON.parse(data);
-        app.hidePreloader();
-        console.log(url, data);
-        if (data.errCode === "00") {
-          return cb(data);
-        } else {
-          return app.alert("[" + data.errCode + "]" + data.errMsg);
-        }
-      },
-      error: function(xhr, status) {
-        app.hidePreloader();
-        return app.alert("请求异常:[" + status + "]:" + url);
-      }
-    };
-    if (data != null) {
-      ajaxOpt.data = JSON.stringify(data);
-    }
-    if (headers != null) {
-      ajaxOpt.headers = headers;
-    }
-    app.showPreloader();
-    return $$.ajax(ajaxOpt);
-  };
-  get = function(url, data, headers, cb) {
-    var ajaxOpt;
-    ajaxOpt = {
-      url: url,
-      method: "GET",
-      success: function(data) {
-        data = JSON.parse(data);
-        app.hidePreloader();
-        console.log(url, data);
-        if (data.errCode === "00") {
-          return cb(data);
-        } else {
-          return app.alert("[" + data.errCode + "]" + data.errMsg);
-        }
-      },
-      error: function(xhr, status) {
-        app.hidePreloader();
-        return app.alert("请求异常:[" + status + "]:" + url);
-      }
-    };
-    if (data != null) {
-      ajaxOpt.data = data;
-    }
-    if (headers != null) {
-      ajaxOpt.headers = headers;
-    }
-    app.showPreloader();
-    return $$.ajax(ajaxOpt);
-  };
+
   return {
     appAuth: function(callback) {
       var error, url;
