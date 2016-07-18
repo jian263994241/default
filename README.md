@@ -17,12 +17,9 @@
 
 - /res/css/ - 全局样式(CSS,less)
 
-- /res/image/ - 图片
+- /res/images/ - 图片
 
-- /res/icon/ - icon
 
-#### /third/ - 第三方 模块以外的资源 cue 优化时会忽略改目录
-- /third/framework7 - 框架
 
 #### main.entry.js - App 入口
 
