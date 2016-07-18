@@ -17,8 +17,16 @@ window.app = new Framework7({
   onPageBeforeAnimation: function(app, page) {
     var dataset = Dom7(page.container).dataset();
     app.title(dataset.title);
+  },
+  preprocess: function(content, url, next) {
+    app.H5login.login(function() {
+      next(content);
+    });
   }
 });
+
+app.H5login = require('./mod/common/H5login')(app);
+app.session = require('./mod/common/storage').session;
 
 app.title = function(title) {
   document.title = title;
@@ -41,7 +49,6 @@ app.env = function() {
   };
 }();
 
-app.session = require('./mod/common/storage').session;
 
 window.mainView = app.addView('.view-main', {
   domCache: true
