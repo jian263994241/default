@@ -1,13 +1,11 @@
 module.exports = function(app) {
-  var get, isKuaiQianBao, isWeixin, post, ua;
-  ua = window.navigator.userAgent.toLowerCase();
-  isKuaiQianBao = function() {
+  var ua = window.navigator.userAgent.toLowerCase();
+  var isKuaiQianBao = function() {
     return Boolean(ua.indexOf('kuaiqianbao') > -1);
   };
-  isWeixin = function() {
+  var isWeixin = function() {
     return Boolean(ua.match(/MicroMessenger/i) === 'micromessenger');
   };
-
   return {
     appAuth: function(callback) {
       var error, url;
@@ -40,8 +38,7 @@ module.exports = function(app) {
       });
     },
     outAuth: function(verifyCode, callback) {
-      var url;
-      url = "https://ebd.99bill.com/coc-bill-api/1.0/billApi/auth";
+      var url = "https://ebd.99bill.com/coc-bill-api/1.0/billApi/auth";
       app.showPreloader();
       method('post', {
         url: url,
@@ -52,8 +49,7 @@ module.exports = function(app) {
       });
     },
     wxAuth: function(code, callback) {
-      var url;
-      url = "https://ebd.99bill.com/1.0/oauth2/oauthInfo/";
+      var url = "https://ebd.99bill.com/1.0/oauth2/oauthInfo/";
       app.showPreloader();
       method('get', {
         url: url + code,
@@ -61,23 +57,22 @@ module.exports = function(app) {
       });
     },
     login: function(callback) {
-      var loginToken, next, urlQuery;
-      loginToken = window.sessionStorage.getItem("loginToken");
-      urlQuery = Dom7.parseUrlQuery(location.search);
-      next = function(data) {
+      var loginToken = window.sessionStorage.getItem("loginToken");
+      var urlQuery = Dom7.parseUrlQuery(location.search);
+      var next = function(data) {
         window.sessionStorage.setItem('loginToken', data.loginToken);
-        return callback(data.loginToken);
+        callback(data.loginToken);
       };
       if (loginToken) {
-        return callback(loginToken);
+        callback(loginToken);
       } else if (isKuaiQianBao()) {
-        return this.appAuth(next);
+        this.appAuth(next);
       } else if (isWeixin()) {
-        return this.wxAuth(next);
+        this.wxAuth(next);
       } else if (urlQuery.verifyCode) {
-        return this.outAuth(urlQuery.verifyCode, next);
+        this.outAuth(urlQuery.verifyCode, next);
       } else {
-        return app.alert("未登录,请登录后再试");
+        app.alert("未登录,请登录后再试");
       }
     }
   };
