@@ -1,4 +1,4 @@
-var ua = window.navigator.userAgent.toLowerCase();
+
 
 module.exports = {
   // 验证登录密码 前提已满足只有特殊字符 字母和数字
@@ -27,7 +27,18 @@ module.exports = {
     }, 1000);
     return btn;
   },
+  env: function() {
+    var ua = navigator.userAgent.toLowerCase();
+    return {
+      isWeixin: ua.match(/MicroMessenger/i) == 'micromessenger',
+      iOS: ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1 || ua.indexOf('ipod') > -1,
+      Android: ua.indexOf('android') > -1,
+      KQ: ua.indexOf('kuaiqianbao') > -1,
+      FeiFan: ua.indexOf('feifan') > -1
+    };
+  }(),
   getAppVersion: function() {
+    var ua = window.navigator.userAgent.toLowerCase();
     ua.match(/kuaiqianbao\/([1-9.]+)/)
     return RegExp.$1;
   },
