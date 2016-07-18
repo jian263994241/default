@@ -9,6 +9,8 @@ window.$$ = Dom7;
 window.app = new Framework7({
   // pushState: true,
   swipeBackPage: false,
+  //非React 框架用 onPageInit
+  //React 用onPageBeforeInit
   onPageBeforeInit: function(app, page) {
     if (MOD[page.name]) {
       return MOD[page.name](app, page);
