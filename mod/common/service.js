@@ -34,7 +34,7 @@ function method(type, opt, loginToken) {
 
   function errorHandle(xhr, status) {
     app.hidePreloader();
-    return app.alert('[' + status + ']请求异常' + opt.url);
+    return app.alert(opt.url, '请求异常 - ' + status);
   }
 
 
