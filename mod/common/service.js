@@ -10,7 +10,6 @@
  *}
  **/
 function method(type, opt) {
-
   var type = type.toLocaleUpperCase();
   var codes = opt.codes || ["00"];
   var title = opt.title || "请等待..."
@@ -20,6 +19,7 @@ function method(type, opt) {
     success: successHandle,
     error: errorHandle
   };
+  
   if (opt.data) {
     if (type === "POST") {
       ajaxOpt.contentType = 'application/json;charset=UTF-8';
@@ -28,6 +28,7 @@ function method(type, opt) {
       ajaxOpt.data = opt.data;
     }
   }
+  
   if (opt.loginToken) {
     ajaxOpt.headers = {
       Authorization: sessionStorage.loginToken
@@ -55,8 +56,9 @@ function method(type, opt) {
     app.hidePreloader();
     return app.alert(opt.url, '请求异常 - ' + status);
   }
+  
   app.showPreloader(title);
-  return Dom7.ajax(ajaxOpt);
+  Dom7.ajax(ajaxOpt);
 }
 
 var baseUrl = "https://ebd.99bill.com/coc-bill-api";
