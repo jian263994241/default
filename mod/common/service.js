@@ -1,6 +1,19 @@
-function method(type, opt, loginToken) {
+/**
+* @prams type: 'get','post'
+* @prams opt {
+* url (str):请求链接
+* data (obj): ajax 数据
+* codes (arr): 执行callback的先决条件 默认:["00"]
+* title (str): 等待标题 默认"请等待..."
+* callback (fn): 回调函数
+* loginToken (bool): 值为 true的时候  请求header 带入 loginToken
+*}
+**/
+function method(type, opt) {
 
   var type = type.toLocaleUpperCase();
+  var codes = opt.codes || ["00"];
+  var title = opt.title || "请等待..."
   var ajaxOpt = {
     url: opt.url,
     method: type,
@@ -15,17 +28,23 @@ function method(type, opt, loginToken) {
       ajaxOpt.data = opt.data;
     }
   }
-  if (loginToken) {
+  if (opt.loginToken) {
     ajaxOpt.headers = {
-      Authorization: loginToken
+      Authorization: sessionStorage.loginToken
     }
-  }
+  };
 
   function successHandle(data) {
+    var codeIn = false;
     data = JSON.parse(data);
     console.log(opt.url, data);
     app.hidePreloader();
-    if (data.errCode === '00') {
+    codes.forEach(function(code, index) {
+      if (data.errCode === code) {
+        codeIn = true;
+      }
+    });
+    if (codeIn) {
       return opt.callback(data);
     } else {
       return app.alert(data.errMsg);
@@ -36,8 +55,7 @@ function method(type, opt, loginToken) {
     app.hidePreloader();
     return app.alert(opt.url, '请求异常 - ' + status);
   }
-
-
+  app.showPreloader(title);
   return Dom7.ajax(ajaxOpt);
 }
 
