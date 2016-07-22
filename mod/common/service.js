@@ -1,14 +1,14 @@
 /**
-* @prams type: 'get','post'
-* @prams opt {
-* url (str):请求链接
-* data (obj): ajax 数据
-* codes (arr): 执行callback的先决条件 默认:["00"]
-* title (str): 等待标题 默认"请等待..."
-* callback (fn): 回调函数
-* loginToken (bool): 值为 true的时候  请求header 带入 loginToken
-*}
-**/
+ * @prams type: 'get','post'
+ * @prams opt {
+ * url (str):请求链接
+ * data (obj): ajax 数据
+ * codes (arr): 执行callback的先决条件 默认:["00"]
+ * title (str): 等待标题 默认"请等待..."
+ * callback (fn): 回调函数
+ * loginToken (bool): 值为 true的时候  请求header 带入 loginToken
+ *}
+ **/
 function method(type, opt) {
 
   var type = type.toLocaleUpperCase();
