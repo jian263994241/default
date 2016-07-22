@@ -62,10 +62,7 @@ function method(type, opt) {
 var baseUrl = "https://ebd.99bill.com/coc-bill-api";
 
 var api = {
-  cardBin: "/1.1/banks/cardBin",
-  banks: "/1.0/banks",
-  userInfo: "/1.0/userInfo", //查询个人
-  openAdr: "/1.0/members/card/openAdr" //获取开户地省市列表
+  unRegistShareRelation: "/mkt/1.0/record/unRegist/shareRelation", //T0080004L 记录用户分享关系--用户未注册
 };
 
 for (key in api) {
@@ -75,38 +72,17 @@ for (key in api) {
 
 
 module.exports = {
-  cardBin: function(cardNo, callback) {
-    app.showPreloader();
-    method('get', {
-      url: api.cardBin,
+  unRegistShareRelation: function(data, callback) {
+    method('post', {
+      url: api.unRegistShareRelation,
+      title: "领取中...",
       data: {
-        cardBin: encryptByDES(cardNo)
+        activityCode: data.activityCode,
+        shareCode: data.shareCode
       },
-      callback: callback
-    })
-  },
-  banks: function(callback) {
-    app.showPreloader();
-    method('get', {
-      url: api.banks,
-      data: {
-        bankChannel: 1
-      },
-      callback: callback
-    })
-  },
-  userInfo: function(callback) {
-    var loginToken = app.session.get('loginToken');
-    method('get', {
-      url: api.userInfo,
-      callback: callback
-    }, loginToken);
-  },
-  openAdr: function(callback) {
-    app.showPreloader();
-    method('get', {
-      url: api.openAdr,
-      callback: callback
-    })
+      callback: callback,
+      loginToken: true,
+      code: ['00', '20', '21']
+    });
   }
 }
