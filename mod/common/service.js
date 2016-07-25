@@ -89,7 +89,7 @@ module.exports = {
       },
       callback: callback,
       loginToken: true,
-      code: ['00', '20', '21']
+      codes: ['00', '20', '21']
     });
   }
 }
