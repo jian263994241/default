@@ -31,7 +31,7 @@ function method(type, opt) {
   
   if (opt.loginToken) {
     ajaxOpt.headers = {
-      Authorization: sessionStorage.loginToken
+      Authorization: app.session.get('loginToken')
     }
   };
 
