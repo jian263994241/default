@@ -63,6 +63,11 @@ function method(type, opt) {
 
 var baseUrl = "https://ebd.99bill.com/coc-bill-api";
 
+if (location.port == "8080") {
+  //本地调试走服务器代理
+  baseUrl = "/coc-bill-api";
+}
+
 var api = {
   unRegistShareRelation: "/mkt/1.0/record/unRegist/shareRelation", //T0080004L 记录用户分享关系--用户未注册
 };
