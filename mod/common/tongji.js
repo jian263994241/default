@@ -1,34 +1,35 @@
-
 (function() {
-    var hm = document.createElement("script");
-    hm.src = "//hm.baidu.com/hm.js?f8aa26d00df984f263a957ef3e78f3c4";
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(hm, s);
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?f8aa26d00df984f263a957ef3e78f3c4";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
 })();
 
-var trackEvent = function(_events,type){
-  this._events = _events;
+var trackEvent = function(events, type) {
+  this._events = events;
   this.type = type;
 };
 
-trackEvent.prototype.emit = function(name){
+trackEvent.prototype.emit = function(key) {
   try {
-    _hmt.push(['_trackEvent',this.type, this._events[name]]);
+    _hmt.push(['_trackEvent', this.type, this._events[key - 1]]);
   } catch (e) {
 
   }
 };
 
-var type = 'kuaiyihuasq_may01';
+var type = 'yaoqinghaoyou_jul01';
 
-var _EVENTS = {
-  "kuaiyihuasq_gerenxinxi":"kuaiyihuasq_may01_gerenxinxi", //个人信息
-  "kuaiyihuasq_danweixinxi":"kuaiyihuasq_may01_danweixinxi", //单位信息
-  "kuaiyihuasq_qitaxinxi":"kuaiyihuasq_may01_qitaxinxi", //其他信息
-  "kuaiyihuasq_tijiao":"kuaiyihuasq_may01_gerenxinxi", //提交
-  "kuaiyihuasq_chenggong":"kuaiyihuasq_may01_chenggong", //成功
-  "kuaiyihuasq_tongxunlu":"kuaiyihuasq_may01_chenggong" //通讯录
-}
+// ① 邀请好友_邀请1
+// ② 邀请好友_活动详情
+// ③ 邀请好友_邀请2
+// ④ 邀请好友_实名认证
+// ⑤ 邀请好友_活动详情页面
+// ⑥ 邀请好友_我的邀请页面
+// ⑦ 邀请好友_实名认证页面
+var EVENTS = [
+  "yaoqinghaoyou_jul01_yaoqing1", "yaoqinghaoyou_jul01_huodongxiangqing", "yaoqinghaoyou_jul01_yaoqing2", "yaoqinghaoyou_jul01_shimingrenzheng", "yaoqinghaoyou_jul01_huodongxiangqingym", "yaoqinghaoyou_jul01_wodeyaoqingym", "yaoqinghaoyou_jul01_shimingym"
+]
 
 
-module.exports = new trackEvent(_EVENTS,type);
+module.exports = new trackEvent(EVENTS, type);
