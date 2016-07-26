@@ -1,4 +1,10 @@
 module.exports = function(app) {
+  var baseUrl = "https://ebd.99bill.com";
+  if (location.port == "8080") {
+    //本地调试走服务器代理
+    baseUrl = "";
+  };
+
   var ua = window.navigator.userAgent.toLowerCase();
   var isKuaiQianBao = function() {
     return Boolean(ua.indexOf('kuaiqianbao') > -1);
@@ -9,7 +15,7 @@ module.exports = function(app) {
   return {
     appAuth: function(callback) {
       var error, url;
-      url = 'https://ebd.99bill.com/coc-bill-api/1.0/app/auth';
+      url = baseUrl + '/coc-bill-api/1.0/app/auth';
       error = function(res) {
         return alert(JSON.stringify(res));
       };
@@ -38,7 +44,7 @@ module.exports = function(app) {
       });
     },
     outAuth: function(verifyCode, callback) {
-      var url = "https://ebd.99bill.com/coc-bill-api/1.0/billApi/auth";
+      var url = baseUrl + "/coc-bill-api/1.0/billApi/auth";
       app.showPreloader();
       method('post', {
         url: url,
@@ -49,7 +55,7 @@ module.exports = function(app) {
       });
     },
     wxAuth: function(code, callback) {
-      var url = "https://ebd.99bill.com/1.0/oauth2/oauthInfo/";
+      var url = baseUrl + "/1.0/oauth2/oauthInfo/";
       app.showPreloader();
       method('get', {
         url: url + code,
