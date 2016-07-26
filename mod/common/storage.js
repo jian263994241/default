@@ -1,10 +1,8 @@
-var base, copy, localStorage, sessionStorage;
+var sessionStorage = window.sessionStorage || {};
 
-sessionStorage = window.sessionStorage || {};
+var localStorage = window.localStorage || {};
 
-localStorage = window.localStorage || {};
-
-copy = function(o, sub) {
+function copy(o, sub) {
   var key, value;
   for (key in sub) {
     value = sub[key];
@@ -17,30 +15,25 @@ copy = function(o, sub) {
   return o;
 };
 
-base = {
+var storage = {
   set: function(key, value) {
-    var e, error;
-    try {
-      return this[key] = JSON.stringify(value);
-    } catch (error) {
-      e = error;
-      return this[key] = value;
+    if (typeof value === "string") {
+      this[key] = value;
+    } else {
+      this[key] = JSON.stringify(value);
     }
   },
   get: function(key, def) {
-    var e, error, value;
     try {
-      value = JSON.parse(this[key]);
+      var value = JSON.parse(this[key]);
     } catch (error) {
-      e = error;
       value = this[key];
     }
-    if (value === void 0 && def !== void 0) {
+    if (!value && def) {
       this.set(key, def);
       return def;
-    } else {
-      return value;
-    }
+    };
+    return value;
   },
   del: function(key) {
     return this.removeItem(key);
@@ -48,7 +41,6 @@ base = {
 };
 
 module.exports = {
-  session: copy(sessionStorage, base),
-  local: copy(localStorage, base)
+  session: copy(sessionStorage, storage),
+  local: copy(localStorage, storage)
 };
-
