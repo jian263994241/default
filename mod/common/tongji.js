@@ -10,7 +10,7 @@ var trackEvent = function(events, type) {
   this.type = type;
 };
 
-trackEvent.prototype.emit = function(key) {
+trackEvent.prototype.track = function(key) {
   try {
     _hmt.push(['_trackEvent', this.type, this._events[key - 1]]);
   } catch (e) {
