@@ -12,25 +12,27 @@ module.exports = {
 
     return (lowercase && capital) || (lowercase && number) || (lowercase && specialCharacter) || (capital && number) || (number && specialCharacter);
   },
-  stateToggle: function(btn) {
+  countDown: function(btn, s) {
+    var btn = Dom7(btn);
+    var s = s || 60;
+    var SMStimer;
     btn.addClass('disabled');
-    var s = 60;
-    btn.html(s-- + 's重新发');
-    SMStimer = setInterval(function() {
+    btn.html(String(s--) + 's重新发');
+    SMStimer = setInterval(function(btn) {
       if (s == 0) {
         clearInterval(SMStimer);
         btn.removeClass('disabled');
-        btn.html(btn.data('text'));
+        btn.html("重新发送短信");
         return;
       }
-      btn.html(s-- + 's重新发');
-    }, 1000);
+      btn.html(String(s--) + 's重新发');
+    }, 1000, btn);
     return btn;
   },
   setTitle: function(){
     document.title = title;
     try {
-      kuaiqian.setPageTitle({
+      KQB.native("setPageTitle", {
         title: title
       });
     } catch (e) {}
