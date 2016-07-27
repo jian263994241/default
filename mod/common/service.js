@@ -6,7 +6,7 @@
  * codes (arr): 执行callback的先决条件 默认:["00"]
  * title (str): 等待标题 默认"请等待..."
  * callback (fn): 回调函数
- * loginToken (bool): 值为 true的时候  请求header 带入 loginToken
+ * loginToken (bool): 值为 true的时候  请求header 带入 loginToken,其中 loginToken 从session中获取
  *}
  **/
 function method(type, opt) {
