@@ -40,20 +40,24 @@ function method(type, opt) {
   };
 
   function successHandle(data, status, xhr) {
+    var codeIn = false;
+    var data = JSON.parse(data);
+
     app.hidePreloader();
+    
     console.group(xhr.requestUrl);
     console.log('method:', xhr.requestParameters.method);
     console.log('data:', xhr.requestParameters.data);
     console.log('headers:', xhr.requestParameters.headers);
     console.log('response:', data);
     console.groupEnd();
-    var codeIn = false;
-    var data = JSON.parse(data);
+
     codes.forEach(function(code, index) {
       if (data.errCode === code) {
         codeIn = true;
       }
     });
+    
     if (codeIn) {
       return opt.callback(data);
     } else {
