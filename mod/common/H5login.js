@@ -29,7 +29,6 @@ module.exports = function(app) {
             success: function(res) {
               var deviceId;
               deviceId = res.deviceId;
-              app.showPreloader();
               method('post', {
                 url: url,
                 data: {
@@ -47,7 +46,6 @@ module.exports = function(app) {
     },
     outAuth: function(verifyCode, callback) {
       var url = baseUrl + "/coc-bill-api/1.0/billApi/auth";
-      app.showPreloader();
       method('post', {
         url: url,
         data: {
@@ -58,7 +56,6 @@ module.exports = function(app) {
     },
     wxAuth: function(code, callback) {
       var url = baseUrl + "/1.0/oauth2/oauthInfo/";
-      app.showPreloader();
       method('get', {
         url: url + code,
         callback: callback
