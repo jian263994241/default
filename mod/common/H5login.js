@@ -1,3 +1,5 @@
+var method = require('./ajaxWrap');
+
 module.exports = function(app) {
   var baseUrl = "https://ebd.99bill.com";
   if (location.port == "8080") {
@@ -83,44 +85,3 @@ module.exports = function(app) {
     }
   };
 };
-
-function method(type, opt, loginToken) {
-  type = type.toLocaleUpperCase();
-  var ajaxOpt = {
-    url: opt.url,
-    method: type,
-    success: successHandle,
-    error: errorHandle
-  };
-  if (opt.data) {
-    if (type === "POST") {
-      ajaxOpt.contentType = 'application/json;charset=UTF-8';
-      ajaxOpt.data = JSON.stringify(opt.data);
-    } else {
-      ajaxOpt.data = opt.data;
-    }
-  }
-  if (loginToken) {
-    ajaxOpt.headers = {
-      Authorization: loginToken
-    }
-  }
-
-  function successHandle(data) {
-    data = JSON.parse(data);
-    console.log(opt.url, data);
-    app.hidePreloader();
-    if (data.errCode === '00') {
-      return opt.callback(data);
-    } else {
-      return app.alert(data.errMsg);
-    }
-  };
-
-  function errorHandle(xhr, status) {
-    app.hidePreloader();
-    return app.alert('[' + status + ']请求异常' + opt.url);
-  }
-
-  return Dom7.ajax(ajaxOpt);
-}
