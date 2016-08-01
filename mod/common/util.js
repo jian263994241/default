@@ -29,7 +29,7 @@ module.exports = {
     }, 1000, btn);
     return btn;
   },
-  setTitle: function(){
+  setTitle: function(title){
     document.title = title;
     try {
       KQB.native("setPageTitle", {
