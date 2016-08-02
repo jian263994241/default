@@ -35,7 +35,7 @@ module.exports = function(type, opt) {
 
   if (opt.loginToken) {
     ajaxOpt.headers = {
-      Authorization: app.session.get('loginToken')
+      Authorization: sessionStorage.loginToken
     }
   };
 
