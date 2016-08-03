@@ -11,6 +11,7 @@
  *  errorCallback:fn (选填) 错误回调函数
  *}
  **/
+
 module.exports = function(type, opt) {
   var app = Framework7.prototype.constructor();
   var type = type.toLocaleUpperCase();
@@ -24,7 +25,6 @@ module.exports = function(type, opt) {
     success: successHandle,
     error: errorHandle
   };
-
   if (opt.data) {
     if (type === "POST") {
       ajaxOpt.contentType = 'application/json;charset=UTF-8';
@@ -39,7 +39,7 @@ module.exports = function(type, opt) {
       Authorization: sessionStorage.loginToken
     }
   };
-  //other token 
+  //other token
   if (opt.token) {
     ajaxOpt.headers = {
       Authorization: sessionStorage.token
@@ -52,7 +52,7 @@ module.exports = function(type, opt) {
 
     app.hidePreloader();
 
-    console.group(xhr.requestUrl);
+    console.groupCollapsed(xhr.requestUrl);
     console.log('method:', xhr.requestParameters.method);
     console.log('data:', xhr.requestParameters.data);
     console.log('headers:', xhr.requestParameters.headers);
