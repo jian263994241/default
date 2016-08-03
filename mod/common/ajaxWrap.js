@@ -39,6 +39,12 @@ module.exports = function(type, opt) {
       Authorization: sessionStorage.loginToken
     }
   };
+  //other token 
+  if (opt.token) {
+    ajaxOpt.headers = {
+      Authorization: sessionStorage.token
+    }
+  };
 
   function successHandle(data, status, xhr) {
     var codeIn = false;
