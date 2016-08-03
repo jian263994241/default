@@ -12,6 +12,7 @@
  *}
  **/
 module.exports = function(type, opt) {
+  var app = Framework7.prototype.constructor();
   var type = type.toLocaleUpperCase();
   var codes = opt.codes || ["00"];
   var title = opt.title || "请等待..."
