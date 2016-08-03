@@ -52,10 +52,9 @@ module.exports = function(type, opt) {
 
     app.hidePreloader();
 
-    console.groupCollapsed(xhr.requestUrl);
-    console.log('method:', xhr.requestParameters.method);
-    console.log('data:', xhr.requestParameters.data);
+    console.groupCollapsed(xhr.requestParameters.method, xhr.requestUrl);
     console.log('headers:', xhr.requestParameters.headers);
+    console.log('request:', xhr.requestParameters.data);
     console.log('response:', data);
     console.groupEnd();
 
