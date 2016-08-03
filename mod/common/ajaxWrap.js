@@ -54,7 +54,7 @@ module.exports = function(type, opt) {
 
     console.groupCollapsed(xhr.requestParameters.method, xhr.requestUrl);
     console.log('headers:', xhr.requestParameters.headers);
-    console.log('request:', xhr.requestParameters.data);
+    console.log('request:', typeof xhr.requestParameters.data == 'string' ? JSON.parse(xhr.requestParameters.data) : xhr.requestParameters.data);
     console.log('response:', data);
     console.groupEnd();
 
