@@ -76,7 +76,8 @@ module.exports = function(type, opt) {
     if (opt.errorCallback) {
       return opt.errorCallback(xhr, status);
     };
-    return app.alert(opt.url, '请求异常 - ' + status);
+    console.log('网络异常:', opt.url);
+    return app.alert('网络异常');
   };
 
   app.showPreloader(title);
