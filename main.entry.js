@@ -6,7 +6,8 @@ var MOD = {
 window.$$ = Dom7;
 
 window.app = new Framework7({
-  // pushState: true,
+  pushState: true,
+  pushStateSeparator: '',
   swipeBackPage: false,
   //非React 框架用 onPageInit
   //React 用onPageBeforeInit
