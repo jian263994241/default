@@ -16,14 +16,20 @@ window.app = new Framework7({
       return MOD[page.name](app, page);
     }
   },
-  onPageBeforeAnimation: function(app, page) {
-    var dataset = Dom7(page.container).dataset();
-    util.setTitle(dataset.title);
-  },
-  preprocess: function(content, url, next) {
-    app.H5login.login(function() {
-      next(content);
-    });
+  // preprocess: function(content, url, next) {
+  //   app.H5login.login(function() {
+  //     next(content);
+  //   });
+  // },
+  preroute: function(view, options) {
+    setTimeout(function() {
+      var page = view.activePage,
+        dataset;
+      if (page) {
+        dataset = Dom7(page.container).dataset();
+        util.setTitle(dataset.title);
+      }
+    }, 200);
   }
 });
 
