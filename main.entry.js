@@ -1,6 +1,7 @@
 var util = require('./mod/common/util');
 var MOD = {
-  index: require("./mod/index/index")
+  index: require("./mod/index/index"),
+  other: require("./mod/index/other")
 };
 
 window.$$ = Dom7;
@@ -9,13 +10,6 @@ window.app = new Framework7({
   pushState: true,
   pushStateSeparator: '',
   swipeBackPage: false,
-  //非React 框架用 onPageInit
-  //React 用onPageBeforeInit
-  onPageBeforeInit: function(app, page) {
-    if (MOD[page.name]) {
-      return MOD[page.name](app, page);
-    }
-  },
   // preprocess: function(content, url, next) {
   //   app.H5login.login(function() {
   //     next(content);
@@ -33,6 +27,18 @@ window.app = new Framework7({
   }
 });
 
+//非React 框架用 onPageInit
+//React 用onPageBeforeInit
+$$(document).on('pageInit', pageIn);
+$$(document).on('pageReinit', pageIn);
+
+function pageIn(e) {
+  var page = e.detail.page;
+  if (MOD[page.name]) {
+    return MOD[page.name](app, page);
+  }
+};
+
 app.H5login = require('./mod/common/H5login')(app);
 app.session = require('./mod/common/storage').session;
 
@@ -45,9 +51,3 @@ mainView.router.load({
   pushState: false,
   animatePages: false
 });
-
-//测试用
-// var query = $$.parseUrlQuery(location.search);
-// if (query.loginToken) {
-//   app.session.set("loginToken", query.loginToken);
-// }
