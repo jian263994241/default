@@ -27,10 +27,20 @@ window.app = new Framework7({
   }
 });
 
+window.mainView = app.addView('.view-main', {
+  domCache: true
+});
+
+
+app.H5login = require('./mod/common/H5login')(app);
+app.session = require('./mod/common/storage').session;
+
+
 //非React 框架用 onPageInit
 //React 用onPageBeforeInit
-$$(document).on('pageInit', pageIn);
-$$(document).on('pageReinit', pageIn);
+$$(document)
+  .on('pageInit', pageIn)
+  .on('pageReinit', pageIn);
 
 function pageIn(e) {
   var page = e.detail.page;
@@ -38,13 +48,6 @@ function pageIn(e) {
     return MOD[page.name](app, page);
   }
 };
-
-app.H5login = require('./mod/common/H5login')(app);
-app.session = require('./mod/common/storage').session;
-
-window.mainView = app.addView('.view-main', {
-  domCache: true
-});
 
 mainView.router.load({
   pageName: 'index',
