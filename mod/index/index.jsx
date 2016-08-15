@@ -2,20 +2,28 @@ var service = require("../common/service");
 
 var Page = React.createClass({
   getInitialState: function() {
-    return {
-      password: ""
-    }
+    return {password: ""}
   },
-  componentDidMount: function() {
-    this.view = app.getCurrentView();
+  componentWillMount: function() {
+    this.query = this.props.parent.query;
+    this.view = this.props.parent.view;
+    this.update();
+  },
+  // componentDidMount: function() {},
+  componentWillReceiveProps: function() {
+    // 如果需要刷新数据
+    // this.update();
+  },
+  update: function() {
+    console.log('index', 'ajax data ...');
   },
   events: {
     inputChange: function(e) {
       var input = e.target;
-      this.refs.submit.disabled = input.value.length > 5 ? 0 : 1;
-      this.setState({
-        password: input.value
-      });
+      this.refs.submit.disabled = input.value.length > 5
+        ? 0
+        : 1;
+      this.setState({password: input.value});
     },
     forget: function() {
       app.alert('建设中...');
@@ -51,14 +59,15 @@ var Page = React.createClass({
             </p>
           </div>
         </form>
+        <a href="#other">link other page</a>
       </div>
     )
   }
 });
 
-
 module.exports = function(app, page) {
   var container = page.container;
 
-  ReactDOM.render( <Page /> , container);
+  ReactDOM.render(
+    <Page parent={page}/>, container);
 }
