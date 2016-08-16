@@ -76,8 +76,8 @@ module.exports = function(type, opt) {
     if (opt.errorCallback) {
       return opt.errorCallback(xhr, status);
     };
-    console.log('网络异常:', opt.url);
-    return app.alert('网络异常');
+    console.log('请求失败:', opt.url);
+    return app.toast('网络状况不太好,稍后再试哦~');
   };
 
   app.showPreloader(title);
