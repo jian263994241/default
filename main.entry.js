@@ -6,6 +6,19 @@ var MOD = {
 
 window.$$ = Dom7;
 
+//非React 框架用 onPageInit
+//React 用onPageBeforeInit
+$$(document)
+  .on('pageInit', pageIn)
+  .on('pageReinit', pageIn);
+
+function pageIn(e) {
+  var page = e.detail.page;
+  if (MOD[page.name]) {
+    return MOD[page.name](app, page);
+  }
+};
+
 window.app = new Framework7({
   pushState: true,
   pushStateSeparator: '',
@@ -34,20 +47,6 @@ window.mainView = app.addView('.view-main', {
 
 app.H5login = require('./mod/common/H5login')(app);
 app.session = require('./mod/common/storage').session;
-
-
-//非React 框架用 onPageInit
-//React 用onPageBeforeInit
-$$(document)
-  .on('pageInit', pageIn)
-  .on('pageReinit', pageIn);
-
-function pageIn(e) {
-  var page = e.detail.page;
-  if (MOD[page.name]) {
-    return MOD[page.name](app, page);
-  }
-};
 
 mainView.router.load({
   pageName: 'index',
