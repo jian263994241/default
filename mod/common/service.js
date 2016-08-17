@@ -1,4 +1,4 @@
-var method = require('./ajaxWrap');
+var method = require('./util').ajax;
 
 var baseUrl = "https://ebd.99bill.com/coc-bill-api";
 
