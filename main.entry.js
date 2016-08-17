@@ -32,9 +32,15 @@ window.app = new Framework7({
     setTimeout(function() {
       var page = view.activePage,
         dataset;
-      if (page) {
-        dataset = Dom7(page.container).dataset();
-        util.setTitle(dataset.title);
+      if (!page) return;
+      dataset = Dom7(page.container).dataset();
+      util.setTitle(dataset.title);
+      if (dataset.url) {
+        app.showIndicator();
+        Dom7.get(dataset.url, function(data) {
+          Dom7(page.container).html(data);
+          app.hideIndicator();
+        });
       }
     }, 200);
   }
