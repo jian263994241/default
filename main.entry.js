@@ -1,4 +1,5 @@
 var util = require('./mod/common/util');
+
 var MOD = {
   index: require("./mod/index/index"),
   other: require("./mod/index/other")
@@ -36,10 +37,8 @@ window.app = new Framework7({
       dataset = Dom7(page.container).dataset();
       util.setTitle(dataset.title);
       if (dataset.url) {
-        app.showIndicator();
-        Dom7.get(dataset.url, function(data) {
+        util.loadPage(dataset.url, function(data) {
           Dom7(page.container).html(data);
-          app.hideIndicator();
         });
       }
     }, 200);
