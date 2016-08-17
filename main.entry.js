@@ -41,7 +41,7 @@ window.app = new Framework7({
           Dom7(page.container).html(data);
         });
       }
-    }, 200);
+    }, 300);
   }
 });
 
