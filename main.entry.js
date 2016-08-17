@@ -7,8 +7,6 @@ var MOD = {
 
 window.$$ = Dom7;
 
-//非React 框架用 onPageInit
-//React 用onPageBeforeInit
 $$(document)
   .on('pageInit', pageIn)
   .on('pageReinit', pageIn);
