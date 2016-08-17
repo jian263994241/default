@@ -48,8 +48,12 @@ window.mainView = app.addView('.view-main', {
 app.H5login = require('./mod/common/H5login')(app);
 app.session = require('./mod/common/storage').session;
 
-mainView.router.load({
-  pageName: 'index',
-  pushState: false,
-  animatePages: false
-});
+var targetPage = location.hash.replace(/^#/, '');
+
+if (targetPage == "") {
+  mainView.router.load({
+    pageName: 'index',
+    pushState: false,
+    animatePages: false
+  });
+}
