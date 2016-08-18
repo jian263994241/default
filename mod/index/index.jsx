@@ -9,7 +9,10 @@ var Page = React.createClass({
     this.view = this.props.parent.view;
     this.update();
   },
+  // getDefaultProps
+  // componentWillMount
   // componentDidMount: function() {},
+  // componentWillReceiveProps
   componentWillReceiveProps: function() {
     // 如果需要刷新数据
     // this.update();
