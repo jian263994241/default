@@ -22,11 +22,6 @@ window.app = new Framework7({
   pushState: true,
   pushStateSeparator: '',
   swipeBackPage: false,
-  // preprocess: function(content, url, next) {
-  //   app.H5login.login(function() {
-  //     next(content);
-  //   });
-  // },
   preroute: function(view, options) {
     setTimeout(function() {
       var page = view.activePage,
@@ -48,7 +43,7 @@ window.mainView = app.addView('.view-main', {
 });
 
 
-app.H5login = require('./mod/common/H5login')(app);
+app.login = require('./mod/common/H5login');
 app.session = require('./mod/common/storage').session;
 
 var targetPage = location.hash.replace(/^#/, '');
