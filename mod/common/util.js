@@ -38,7 +38,7 @@ module.exports = {
   env: function() {
     var ua = navigator.userAgent.toLowerCase();
     return {
-      isWeixin: ua.match(/MicroMessenger/i) == 'micromessenger',
+      Weixin: ua.match(/MicroMessenger/i) == 'micromessenger',
       iOS: ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1 || ua.indexOf('ipod') > -1,
       Android: ua.indexOf('android') > -1,
       KQ: ua.indexOf('kuaiqianbao') > -1,
