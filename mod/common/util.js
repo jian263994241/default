@@ -39,7 +39,7 @@ module.exports = {
     var ua = navigator.userAgent.toLowerCase();
     return {
       Weixin: ua.match(/MicroMessenger/i) == 'micromessenger',
-      iOS: ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1 || ua.indexOf('ipod') > -1,
+      IOS: ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1 || ua.indexOf('ipod') > -1,
       Android: ua.indexOf('android') > -1,
       KQ: ua.indexOf('kuaiqianbao') > -1,
       FeiFan: ua.indexOf('feifan') > -1
