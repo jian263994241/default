@@ -85,9 +85,4 @@ module.exports = function(callback) {
     app.alert("未登录,请登录后再试");
   }
 };
-//     },
-//     error: error
-//   });
-// }
 
-// };;
