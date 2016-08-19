@@ -2,21 +2,19 @@ var service = require("../common/service");
 
 var Page = React.createClass({
   getInitialState: function() {
-    return {password: ""}
+    return {};
+  },
+  getDefaultProps:function(){
+    return {};
   },
   componentWillMount: function() {
     this.query = this.props.parent.query;
     this.view = this.props.parent.view;
-    this.update();
+    //this.update();
   },
-  // componentDidMount: function() {},
-  componentWillReceiveProps: function() {
-    // 如果需要刷新数据
-    // this.update();
-  },
-  update: function() {
-    console.log('other', 'ajax data ...');
-  },
+  componentDidMount: function() {},
+  componentWillReceiveProps: function() {},
+  update: function() {},
   events: {},
   render: function() {
     return (
