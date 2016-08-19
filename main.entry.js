@@ -23,6 +23,7 @@ window.app = new Framework7({
   pushStateSeparator: '',
   swipeBackPage: false,
   onPageBeforeInit:function(){
+    //重置IOS回弹,方便page单独disableBounce
     util.enableBounce();
   },
   preroute: function(view, options) {
