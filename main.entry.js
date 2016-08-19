@@ -8,7 +8,7 @@ var MOD = {
 window.$$ = Dom7;
 
 $$(document)
-  .on('pageInit', pageIn)
+  .on('pageBeforeInit', pageIn)
   .on('pageReinit', pageIn);
 
 function pageIn(e) {
@@ -22,6 +22,9 @@ window.app = new Framework7({
   pushState: true,
   pushStateSeparator: '',
   swipeBackPage: false,
+  onPageBeforeInit:function(){
+    util.enableBounce();
+  },
   preroute: function(view, options) {
     setTimeout(function() {
       var page = view.activePage,
