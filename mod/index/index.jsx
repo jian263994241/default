@@ -1,4 +1,5 @@
 var service = require("../common/service");
+var util = require("../common/util");
 
 var Page = React.createClass({
   getInitialState: function() {
