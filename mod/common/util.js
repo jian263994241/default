@@ -214,6 +214,16 @@ module.exports = {
         app.toast('网络异常');
       }
     });
+  },
+  disableBounce: function() {
+    document.body.addEventListener('touchmove', bodyScroll, false);
+  },
+  enableBounce: function() {
+    document.body.removeEventListener('touchmove', bodyScroll, false);
   }
 
 }
+
+function bodyScroll(e) {
+  e.preventDefault();
+};
