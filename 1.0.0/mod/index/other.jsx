@@ -4,7 +4,7 @@ var Page = React.createClass({
   getInitialState: function() {
     return {};
   },
-  getDefaultProps:function(){
+  getDefaultProps: function() {
     return {};
   },
   componentWillMount: function() {
@@ -20,6 +20,7 @@ var Page = React.createClass({
     return (
       <div className="page-content">
         <a href="#index">index</a>
+        <img src={__uri('../../res/images/logo-new.png')} alt=""/>
       </div>
     )
   }
