@@ -22,7 +22,7 @@ window.app = new Framework7({
   pushState: true,
   pushStateSeparator: '',
   swipeBackPage: false,
-  onPageBeforeInit:function(){
+  onPageBeforeInit: function() {
     //重置IOS回弹,方便page单独disableBounce
     util.enableBounce();
   },
@@ -53,9 +53,10 @@ app.session = require('./mod/common/storage').session;
 var targetPage = location.hash.replace(/^#/, '');
 
 if (targetPage == "") {
-  mainView.router.load({
-    pageName: 'index',
-    pushState: false,
-    animatePages: false
-  });
+  targetPage = "index";
 }
+mainView.router.load({
+  pageName: targetPage,
+  pushState: false,
+  animatePages: false
+});
