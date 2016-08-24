@@ -27,6 +27,7 @@ function appAuth(callback) {
       var accessToken = res.accessToken;
       KQB.native('getDeviceId', {
         success: function(res) {
+          window.sessionStorage.setItem('deviceId', res.deviceId);
           method('post', {
             url: url,
             data: {
@@ -85,4 +86,3 @@ module.exports = function(callback) {
     app.alert("未登录,请登录后再试");
   }
 };
-

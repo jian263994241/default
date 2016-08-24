@@ -51,10 +51,10 @@ app.login = require('./mod/common/H5login');
 app.session = require('./mod/common/storage').session;
 
 var targetPage = location.hash.replace(/^#/, '');
-
 if (targetPage == "") {
   targetPage = "index";
-}
+};
+
 mainView.router.load({
   pageName: targetPage,
   pushState: false,
