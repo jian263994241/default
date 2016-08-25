@@ -83,7 +83,12 @@ module.exports = function(callback, errCallback) {
     wxAuth(urlQuery.code, function(data) {
       switch (data.errCode) {
         case '00':
-          next()
+          window.sessionStorage.setItem('openId', data.openId);
+          if (data.loginToken == '') {
+            errCallback();
+          } else {
+            next();
+          }
           break;
         case '01':
           app.toast(data.errMsg);
