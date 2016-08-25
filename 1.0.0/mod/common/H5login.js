@@ -16,7 +16,7 @@ var isKuaiQianBao = function() {
 };
 
 var isWeixin = function() {
-  return Boolean(ua.match(/MicroMessenger/i) === 'micromessenger');
+  return Boolean(ua.indexOf('micromessenger') > -1);
 };
 
 function appAuth(callback) {
@@ -62,7 +62,8 @@ function wxAuth(code, callback) {
   var url = baseUrl + "/coc-bill-api/1.0/oauth2/oauthInfo/";
   method('get', {
     url: url + code,
-    callback: callback
+    callback: callback,
+    codes: ['00', '01']
   });
 };
 
@@ -79,7 +80,17 @@ module.exports = function(callback, errCallback) {
   } else if (isKuaiQianBao()) {
     appAuth(next);
   } else if (isWeixin()) {
-    wxAuth(urlQuery.code, next);
+    wxAuth(urlQuery.code, function(data) {
+      switch (data.errCode) {
+        case '00':
+          next()
+          break;
+        case '01':
+          app.toast(data.errMsg);
+          errCallback();
+          break;
+      }
+    });
   } else if (urlQuery.verifyCode) {
     outAuth(urlQuery.verifyCode, next);
   } else {
