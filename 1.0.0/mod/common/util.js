@@ -175,6 +175,12 @@ module.exports = {
       console.log('request:', typeof xhr.requestParameters.data == 'string' ? JSON.parse(xhr.requestParameters.data) : xhr.requestParameters.data);
       console.log('response:', data);
       console.groupEnd();
+      //登录失效判断
+      if (data.errCode == '03' && opt.loginToken) {
+        sessionStorage.removeItem('loginToken');
+        return app.alert(data.errMsg);
+      };
+
       codes.forEach(function(code, index) {
         if (data.errCode === code) {
           codeIn = true;
@@ -193,7 +199,7 @@ module.exports = {
         return opt.errorCallback(xhr, status);
       };
       console.log('请求失败:', opt.url);
-      return app.toast('网络状况不太好,稍后再试哦~');
+      return app.toast('网络状况不太好,稍后再试');
     };
 
     Dom7.ajax(ajaxOpt);
