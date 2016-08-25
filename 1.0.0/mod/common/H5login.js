@@ -59,14 +59,14 @@ function outAuth(verifyCode, callback) {
 };
 
 function wxAuth(code, callback) {
-  var url = baseUrl + "/1.0/oauth2/oauthInfo/";
+  var url = baseUrl + "/coc-bill-api/1.0/oauth2/oauthInfo/";
   method('get', {
     url: url + code,
     callback: callback
   });
 };
 
-module.exports = function(callback) {
+module.exports = function(callback, errCallback) {
   var loginToken = window.sessionStorage.getItem("loginToken");
   var urlQuery = Dom7.parseUrlQuery(location.search);
 
@@ -79,10 +79,14 @@ module.exports = function(callback) {
   } else if (isKuaiQianBao()) {
     appAuth(next);
   } else if (isWeixin()) {
-    wxAuth(next);
+    wxAuth(urlQuery.code, next);
   } else if (urlQuery.verifyCode) {
     outAuth(urlQuery.verifyCode, next);
   } else {
-    app.alert("未登录,请登录后再试");
+    if (errCallback) {
+      errCallback();
+    } else {
+      app.alert("未登录,请登录后再试");
+    }
   }
 };
