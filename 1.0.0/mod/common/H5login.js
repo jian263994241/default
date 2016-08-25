@@ -75,6 +75,15 @@ module.exports = function(callback, errCallback) {
     window.sessionStorage.setItem('loginToken', data.loginToken);
     callback(data.loginToken);
   };
+
+  var err = function(){
+    if (errCallback) {
+      errCallback();
+    } else {
+      app.alert("未登录,请登录后再试");
+    }
+  };
+
   if (loginToken) {
     callback(loginToken);
   } else if (isKuaiQianBao()) {
@@ -85,24 +94,21 @@ module.exports = function(callback, errCallback) {
         case '00':
           window.sessionStorage.setItem('openId', data.openId);
           if (data.loginToken == '') {
-            errCallback();
+            err();
           } else {
             next();
           }
           break;
         case '01':
           app.toast(data.errMsg);
-          errCallback();
+          err();
           break;
       }
     });
   } else if (urlQuery.verifyCode) {
     outAuth(urlQuery.verifyCode, next);
   } else {
-    if (errCallback) {
-      errCallback();
-    } else {
-      app.alert("未登录,请登录后再试");
-    }
+    err();
   }
 };
+
