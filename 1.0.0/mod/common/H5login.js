@@ -4,6 +4,8 @@ var app = Framework7.prototype.constructor();
 
 var baseUrl = "https://ebd.99bill.com";
 
+var ss = window.sessionStorage;
+
 if (location.port == "8080") {
   //本地调试走服务器代理
   baseUrl = "";
@@ -21,13 +23,12 @@ var isWeixin = function() {
 
 function appAuth(callback) {
   var url = baseUrl + '/coc-bill-api/1.0/app/auth';
-
-  KQB.native("login", {
+  kuaiqian.native("login", {
     success: function(res) {
       var accessToken = res.accessToken;
       KQB.native('getDeviceId', {
         success: function(res) {
-          window.sessionStorage.setItem('deviceId', res.deviceId);
+          ss.setItem('deviceId', res.deviceId);
           method('post', {
             url: url,
             data: {
@@ -68,15 +69,15 @@ function wxAuth(code, callback) {
 };
 
 module.exports = function(callback, errCallback) {
-  var loginToken = window.sessionStorage.getItem("loginToken");
+  var loginToken = ss.getItem("loginToken");
   var urlQuery = Dom7.parseUrlQuery(location.search);
 
   var next = function(data) {
-    window.sessionStorage.setItem('loginToken', data.loginToken);
+    ss.setItem('loginToken', data.loginToken);
     callback(data.loginToken);
   };
 
-  var err = function(){
+  var err = function() {
     if (errCallback) {
       errCallback();
     } else {
@@ -89,26 +90,29 @@ module.exports = function(callback, errCallback) {
   } else if (isKuaiQianBao()) {
     appAuth(next);
   } else if (isWeixin()) {
-    wxAuth(urlQuery.code, function(data) {
-      switch (data.errCode) {
-        case '00':
-          window.sessionStorage.setItem('openId', data.openId);
-          if (data.loginToken == '') {
+    if (urlQuery.code) {
+      wxAuth(urlQuery.code, function(data) {
+        switch (data.errCode) {
+          case '00':
+            ss.setItem('openId', data.openId);
+            if (data.loginToken) {
+              next(data);
+            } else {
+              err();
+            }
+            break;
+          case '01':
+            app.toast(data.errMsg);
             err();
-          } else {
-            next();
-          }
-          break;
-        case '01':
-          app.toast(data.errMsg);
-          err();
-          break;
-      }
-    });
+            break;
+        }
+      });
+    } else {
+      err();
+    }
   } else if (urlQuery.verifyCode) {
     outAuth(urlQuery.verifyCode, next);
   } else {
     err();
   }
 };
-
