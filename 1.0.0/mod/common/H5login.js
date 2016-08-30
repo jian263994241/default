@@ -60,7 +60,7 @@ function outAuth(verifyCode, callback) {
 };
 
 function wxAuth(code, callback) {
-  var url = baseUrl + "/coc-bill-api/1.0/oauth2/oauthInfo/";
+  var url = baseUrl + "/coc-bill-api/1.1/oauth2/oauthInfo/";
   method('get', {
     url: url + code,
     callback: callback,
