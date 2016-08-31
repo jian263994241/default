@@ -49,7 +49,7 @@ function appAuth(callback) {
 };
 
 function outAuth(verifyCode, callback) {
-  var url = baseUrl + "/coc-bill-api/1.0/billApi/auth";
+  var url = baseUrl + "/coc-bill-api/1.1/billApi/auth";
   method('post', {
     url: url,
     data: {
