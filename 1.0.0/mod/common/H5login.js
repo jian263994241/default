@@ -60,11 +60,10 @@ function outAuth(verifyCode, callback) {
 };
 
 function wxAuth(code, callback) {
-  var url = baseUrl + "/coc-bill-api/1.1/oauth2/oauthInfo/";
+  var url = baseUrl + "/coc-bill-api/1.0/oauth2/oauthInfo/";
   method('get', {
     url: url + code,
-    callback: callback,
-    codes: ['00', '01']
+    callback: callback
   });
 };
 
@@ -81,38 +80,34 @@ module.exports = function(callback, errCallback) {
     if (errCallback) {
       errCallback();
     } else {
-      app.alert("未登录,请登录后再试");
+      // app.alert("未登录,请登录后再试");
+      var nextPage = "&nextPage=" + encodeURIComponent(location.href);
+      window.location.assign('https://www.99bill.com/seashell/webapp/billtrunk2/sign.html?tab=in' + nextPage);
     }
   };
 
   if (loginToken) {
-    callback(loginToken);
-  } else if (isKuaiQianBao()) {
-    appAuth(next);
-  } else if (isWeixin()) {
-    if (urlQuery.code) {
-      wxAuth(urlQuery.code, function(data) {
-        switch (data.errCode) {
-          case '00':
-            ss.setItem('openId', data.openId);
-            if (data.loginToken) {
-              next(data);
-            } else {
-              err();
-            }
-            break;
-          case '01':
-            app.toast(data.errMsg);
-            err();
-            break;
-        }
-      });
-    } else {
-      err();
-    }
-  } else if (urlQuery.verifyCode) {
-    outAuth(urlQuery.verifyCode, next);
-  } else {
-    err();
+    return callback(loginToken);
+  };
+
+  if (isKuaiQianBao()) {
+    return appAuth(next);
+  };
+
+  if (isWeixin() && urlQuery.code) {
+    return wxAuth(urlQuery.code, function(data) {
+      ss.setItem('openId', data.openId);
+      if (data.loginToken) {
+        next(data);
+      } else {
+        err();
+      }
+    });
+  };
+
+  if (urlQuery.verifyCode) {
+    return outAuth(urlQuery.verifyCode, next);
   }
+
+  err();
 };
