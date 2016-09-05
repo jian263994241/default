@@ -125,14 +125,13 @@ module.exports = {
     var codes = opt.codes || ["00"];
     var title = opt.title || "请等待..."
     var timeout = opt.timeout || 0;
+    var showPreloader = opt.showPreloader || true;
     var ajaxOpt = {
       url: opt.url,
       method: type,
       timeout: timeout,
       success: successHandle,
-      error: errorHandle,
-      beforeSend: beforeSend,
-      complete: complete
+      error: errorHandle
     };
     if (opt.data) {
       if (type === "POST") {
@@ -155,15 +154,8 @@ module.exports = {
       }
     };
 
-    function beforeSend(xhr) {
-      return app.showPreloader(title);
-    };
-
-    function complete(xhr, status) {
-      return app.hidePreloader();
-    };
-
     function successHandle(data, status, xhr) {
+      app.hidePreloader();
       var codeIn = false;
       try {
         var data = JSON.parse(data);
@@ -195,13 +187,14 @@ module.exports = {
     };
 
     function errorHandle(xhr, status) {
+      app.hidePreloader();
       if (opt.errorCallback) {
         return opt.errorCallback(xhr, status);
       };
       console.log('请求失败:', opt.url);
       return app.toast('网络状况不太好,稍后再试');
     };
-
+    showPreloader && app.showPreloader(title);
     Dom7.ajax(ajaxOpt);
   },
   loadPage: function(url, success) {
