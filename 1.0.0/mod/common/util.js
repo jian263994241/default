@@ -125,7 +125,7 @@ module.exports = {
     var codes = opt.codes || ["00"];
     var title = opt.title || "请等待..."
     var timeout = opt.timeout || 0;
-    var showPreloader = opt.showPreloader || true;
+    var showPreloader = opt.showPreloader == undefined ? true : opt.showPreloader;
     var ajaxOpt = {
       url: opt.url,
       method: type,
