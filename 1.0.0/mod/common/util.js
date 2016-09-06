@@ -155,7 +155,7 @@ module.exports = {
     };
 
     function successHandle(data, status, xhr) {
-      app.hidePreloader();
+      showPreloader && app.hidePreloader();
       var codeIn = false;
       try {
         var data = JSON.parse(data);
@@ -187,7 +187,7 @@ module.exports = {
     };
 
     function errorHandle(xhr, status) {
-      app.hidePreloader();
+      showPreloader && app.hidePreloader();
       if (opt.errorCallback) {
         return opt.errorCallback(xhr, status);
       };
