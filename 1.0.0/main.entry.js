@@ -23,9 +23,10 @@ window.app = new Framework7({
   pushStateSeparator: '',
   swipeBackPage: false,
   pushStateNoAnimation: true,
-  onPageBeforeInit: function() {
-    //重置IOS回弹,方便page单独disableBounce
-    util.enableBounce();
+  onPageInit:function pageIn(app, page) {
+    if (mod[page.name]) {
+      return mod[page.name](page);
+    }
   },
   preroute: function(view, options) {
     setTimeout(function() {
