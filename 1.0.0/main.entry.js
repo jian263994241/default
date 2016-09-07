@@ -7,17 +7,6 @@ var MOD = {
 
 window.$$ = Dom7;
 
-$$(document)
-  .on('pageBeforeInit', pageIn)
-  .on('pageReinit', pageIn);
-
-function pageIn(e) {
-  var page = e.detail.page;
-  if (MOD[page.name]) {
-    return MOD[page.name](app, page);
-  }
-};
-
 window.app = new Framework7({
   pushState: true,
   pushStateSeparator: '',
