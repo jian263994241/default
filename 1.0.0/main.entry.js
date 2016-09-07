@@ -32,14 +32,17 @@ window.app = new Framework7({
       var page = view.activePage,
         dataset;
       if (!page) return;
-      dataset = Dom7(page.container).dataset();
+      dataset = $$(page.container).dataset();
       util.setTitle(dataset.title);
-      if (dataset.url) {
-        util.loadPage(dataset.url, function(data) {
-          Dom7(page.container).html(data);
-        });
+      if (dataset.disablebounce) {
+        util.disableBounce();
+      } else {
+        util.enableBounce();
       }
-    }, 300);
+      KQB.native('navigationBarMenu', {
+        menuList: []
+      });
+    }, 100);
   }
 });
 
