@@ -219,6 +219,19 @@ module.exports = {
   },
   enableBounce: function() {
     document.body.removeEventListener('touchmove', bodyScroll, false);
+  },
+  loadReactPage: function(opt, view) {
+    var page = document.createElement('div');
+    var pushState = opt.pushState == undefined ? true : false;
+    var animatePages = opt.animatePages == undefined ? true : false;
+    var props = opt.props || {}
+    var view = view || app.getCurrentView();
+    ReactDOM.render(React.createElement(opt.rdom, props), page);
+    view.router.load({
+      content: page,
+      pushState: pushState,
+      animatePages: animatePages
+    });
   }
 
 }
