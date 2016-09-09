@@ -44,21 +44,6 @@ window.mainView = app.addView('.view-main', {
 app.login = require('./mod/common/H5login');
 app.session = require('./mod/common/storage').session;
 
-app.loadContent = function(opt){
-  var page = document.createElement('div');
-  var pClass = opt.class || "page" ;
-  var pushState = opt.pushState || true;
-  var animatePages = opt.animatePages || true;
-  page.setAttribute('data-page',opt.name);
-  page.setAttribute('class', pClass);
-  page.setAttribute('data-title', opt.title);
-  ReactDOM.render(React.createElement(opt.rdom, {query: opt.query}), page);
-  mainView.router.load({
-    content:page,
-    pushState:pushState,
-    animatePages:animatePages
-  });
-};
 
 var targetPage = location.hash.replace(/^#/, '');
 if (targetPage == "") {
