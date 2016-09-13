@@ -27,11 +27,6 @@ var App = React.createClass({
       animatePages: opt.animatePages
     });
   },
-  removeReactDom: function(elem){
-    setTimeout(function(){
-      ReactDOM.unmountComponentAtNode(elem);
-    }, 0);
-  },
   componentDidMount: function() {
     this.mainView = this.addView(this.refs.viewMain);
     this.load({
