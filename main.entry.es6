@@ -29,8 +29,7 @@ var App = React.createClass({
   },
   removeReactDom: function(elem){
     setTimeout(function(){
-      var mountNode = ReactDOM.findDOMNode(elem);
-      ReactDOM.unmountComponentAtNode(mountNode);
+      ReactDOM.unmountComponentAtNode(elem);
     }, 0);
   },
   componentDidMount: function() {
