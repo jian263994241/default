@@ -27,6 +27,12 @@ var App = React.createClass({
       animatePages: opt.animatePages
     });
   },
+  removeReactDom: function(elem){
+    setTimeout(function(){
+      var mountNode = ReactDOM.findDOMNode(elem);
+      ReactDOM.unmountComponentAtNode(mountNode);
+    }, 0);
+  },
   componentDidMount: function() {
     this.mainView = this.addView(this.refs.viewMain);
     this.load({
