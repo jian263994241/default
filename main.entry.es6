@@ -1,37 +1,29 @@
-var createApp = require('./mod/createApp');
+var createApp = require('./mod/app').createApp;
 var util = require('./mod/common/util');
 
-window.$ = Dom7;
+
+window.$$ = Dom7;
+
+var mod = {
+  index: require('./mod/index'),
+  other: require('./mod/index/other')
+}
 
 var App = React.createClass({
   mixins: [createApp()],
-  pages:{
-    'index': require('./mod/index'),
-    'other': require('./mod/index/other')
-  },
-  load:function(opt){
-    var defaultOpt = {
-      pageName:'index',
-      props: {},
-      pushState: false,
-      animatePages: true
-    };
-    for (var key in defaultOpt){
-      if(opt[key] == undefined) opt[key] = defaultOpt[key];
-    };
-    var load = this.mainView.router.load;
-    var page = this.pages[opt.pageName];
-    page && load({
-      content: util.createContent(page, opt.props),
-      pushState: opt.pushState,
-      animatePages: opt.animatePages
-    });
-  },
   componentDidMount: function() {
     this.mainView = this.addView(this.refs.viewMain);
-    this.load({
-      pageName:'index',
-      animatePages: false
+    $$(document).on('pageInit', function (e) {
+      var page = e.detail.page;
+      var pageMod = mod[page.name];
+      if(pageMod){
+        ReactDOM.render(React.createElement(pageMod, {query: page.query, view: page.view}), page.container);
+      }
+    });
+    this.mainView.router.load({
+      url:'p/index.html',
+      animatePages: false,
+      reload: true
     });
   },
   render: function() {
