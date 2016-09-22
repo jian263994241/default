@@ -3,7 +3,9 @@ var util = require("../common/util");
 
 module.exports = React.createClass({
   getInitialState: function() {
-    return {password: ""}
+    return {title: "首页"}
+  },
+  componentDidMount:function(){
   },
   events: {
     inputChange: function(e) {
@@ -20,17 +22,15 @@ module.exports = React.createClass({
   },
   render: function() {
     return (
-      <div className="page" data-page="index" data-title="首页">
-        <div className="page-content">
-          <div className="content-block-title text-center">
-            首页
-          </div>
-          <div className="content-block">
-            <p>
-              <a href="p/other.html">其他页</a>
-            </p>
+      <div className="page-content">
+        <div className="content-block-title text-center">
+          {this.state.title}
+        </div>
+        <div className="content-block">
+          <p>
+            <a href="p/other.html">其他页</a>
+          </p>
 
-          </div>
         </div>
       </div>
     )
