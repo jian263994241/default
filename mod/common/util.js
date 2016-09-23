@@ -122,7 +122,7 @@ module.exports = {
   ajax: function(type, opt) {
     var app = Framework7.prototype.constructor();
     var type = type.toLocaleUpperCase();
-    var codes = opt.codes || ["00"];
+    var codes = opt.codes == undefined ? ["00"] : opt.codes;
     var title = opt.title || "请等待..."
     var timeout = opt.timeout || 0;
     var showPreloader = opt.showPreloader == undefined ? true : opt.showPreloader;
@@ -173,6 +173,10 @@ module.exports = {
         return app.alert(data.errMsg);
       };
 
+      if(codes == "all"){
+        return opt.callback(data);;
+      }
+
       codes.forEach(function(code, index) {
         if (data.errCode === code) {
           codeIn = true;
@@ -181,9 +185,9 @@ module.exports = {
 
       if (codeIn) {
         return opt.callback(data);
-      } else {
-        return app.alert(data.errMsg);
       }
+
+      return app.alert(data.errMsg);
     };
 
     function errorHandle(xhr, status) {

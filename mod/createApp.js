@@ -1,4 +1,14 @@
 
+if(window.ReactDOM){
+  //替换目标节点
+  window.ReactDOM.renderReplace = function(reactElement , domContainerNode){
+    var tempdom = document.createElement('div');
+    var $r = this.render(reactElement, tempdom);
+    domContainerNode.appendChild(tempdom.querySelector('.page'));
+    return $r;
+  }
+}
+
 module.exports = function(){
   var app = new Framework7({
     pushState: true,

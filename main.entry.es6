@@ -8,7 +8,7 @@ var router =  {
   'p/other.html': {title: '更多', mod: require('./mod/index/other')},
 };
 
-$$(document).on('pageInit', function (e) {
+$$(document).on('pageBeforeInit', function (e) {
   var f7page = e.detail.page;
   var page = router[f7page.url];
 
@@ -17,9 +17,8 @@ $$(document).on('pageInit', function (e) {
   }
 
   if(page && page.mod){
-    page.$r = ReactDOM.render(React.createElement(page.mod, {f7page: f7page, router: router}), f7page.container);
+    page.$r = ReactDOM.renderReplace(React.createElement(page.mod, {f7page: f7page, router: router}), f7page.container);
   }
-
 });
 
 $$(document).on('pageBack', function (e) {
