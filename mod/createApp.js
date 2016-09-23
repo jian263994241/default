@@ -4,7 +4,11 @@ if(window.ReactDOM){
   window.ReactDOM.renderReplace = function(reactElement , domContainerNode){
     var tempdom = document.createElement('div');
     var $r = this.render(reactElement, tempdom);
-    domContainerNode.appendChild(tempdom.querySelector('.page'));
+    tempdom = tempdom.querySelector('.page');
+    var children = Array.prototype.slice.call(tempdom.children);
+    children.forEach(function(itemNode){
+      domContainerNode.appendChild(itemNode);
+    });
     return $r;
   }
 }
