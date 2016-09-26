@@ -6,6 +6,7 @@ module.exports = React.createClass({
     return {displayName: "首页"}
   },
   componentDidMount:function(){
+    console.log(this.props);
   },
   events: {
     inputChange: function(e) {

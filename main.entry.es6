@@ -8,29 +8,8 @@ var router =  {
   'p/other.html': {title: '更多', mod: require('./mod/index/other')},
 };
 
-$$(document).on('pageBeforeInit', function (e) {
-  var f7page = e.detail.page;
-  var page = router[f7page.url];
-
-  if(page && page.title){
-    util.setTitle(page.title);
-  }
-
-  if(page && page.mod){
-    page.$r = ReactDOM.renderReplace(React.createElement(page.mod, {f7page: f7page, router: router}), f7page.container);
-  }
-});
-
-$$(document).on('pageBack', function (e) {
-  var url = e.detail.page.view.url;
-  var page = router[url];
-  if(page){
-    util.setTitle(page.title);
-  }
-});
-
 var App = React.createClass({
-  mixins: [createApp()],
+  mixins: [createApp(router)],
   componentDidMount: function() {
     this.mainView = this.addView(this.refs.viewMain);
 

@@ -27,24 +27,6 @@ module.exports = {
     }, 1000, btn);
     return btn;
   },
-  setTitle: function(title) {
-    document.title = title;
-    try {
-      KQB.native("setPageTitle", {
-        title: title
-      });
-    } catch (e) {}
-  },
-  env: function() {
-    var ua = navigator.userAgent.toLowerCase();
-    return {
-      Weixin: ua.match(/MicroMessenger/i) == 'micromessenger',
-      IOS: ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1 || ua.indexOf('ipod') > -1,
-      Android: ua.indexOf('android') > -1,
-      KQ: ua.indexOf('kuaiqianbao') > -1,
-      FeiFan: ua.indexOf('feifan') > -1
-    };
-  }(),
   getAppVersion: function() {
     var ua = window.navigator.userAgent.toLowerCase();
     ua.match(/kuaiqianbao\/([1-9.]+)/)

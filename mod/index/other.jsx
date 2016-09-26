@@ -10,9 +10,17 @@ module.exports = React.createClass({
   componentDidMount: function() {
     console.log(this.props);
   },
+  post2IndexData:function(){
+
+    this.props.f7View.router.back({
+      url:'p/index.html',
+      force: true,
+      query: this
+    });
+  },
   render: function() {
     return (
-      <div className="page navbar-fixed">
+      <div className="page navbar-fixed" data-page="p/other.html">
         <div className="navbar">
           <div className="navbar-inner">
             <div className="left">
@@ -34,7 +42,10 @@ module.exports = React.createClass({
           </div>
           <img src={__uri('../../res/images/logo-new.png')} alt=""/>
           <p>
-            <a className="back" href="p/index.html">首页</a>
+            <a onClick={this.post2IndexData.bind(this)}>post2IndexData</a>
+          </p>
+          <p>
+            <a className="back" href="p/index.html" data-force="true">首页</a>
           </p>
           <div style={{height:500}}></div>
         </div>
