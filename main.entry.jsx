@@ -3,9 +3,15 @@ var createApp = require('./mod/createApp');
 
 window.$$ = Dom7;
 
-var router =  {
-  'p/index.html': {title: '首页', mod: require('./mod/index')},
-  'p/other.html': {title: '更多', mod: require('./mod/index/other')},
+var router = {
+  'p/index.html': {
+    title: '首页',
+    mod: require('./mod/index')
+  },
+  'p/other.html': {
+    title: '更多',
+    mod: require('./mod/index/other')
+  }
 };
 
 var App = React.createClass({
@@ -13,13 +19,10 @@ var App = React.createClass({
   componentDidMount: function() {
     this.mainView = this.addView(this.refs.viewMain);
 
-    if(location.hash == ''){
-      this.mainView.router.load({
-        url:'p/index.html',
-        animatePages: false,
-        reload: true
-      });
+    if (location.hash == '') {
+      this.mainView.router.load({url: 'p/index.html', animatePages: false, reload: true});
     }
+
   },
   render: function() {
     return (
@@ -32,4 +35,7 @@ var App = React.createClass({
   }
 });
 
-window.app = ReactDOM.render(<App />, document.body);
+window.app = ReactDOM.render(
+  <App/>, document.body);
+
+KQB.native("setWebviewBounce", {enableBounce: false});
