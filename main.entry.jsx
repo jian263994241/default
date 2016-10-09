@@ -2,6 +2,7 @@ var util = require('./mod/common/util');
 var createApp = require('./mod/createApp');
 
 window.$$ = Dom7;
+window.KQB = window.KQB || {};
 
 var router = {
   'p/index.html': {

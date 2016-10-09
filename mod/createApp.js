@@ -20,7 +20,7 @@ module.exports = function(virtualPage){
     virtualPage: virtualPage || {}, //和 virtualPageRoot参数一起调用
     preprocess:function(content, url, next){
       //reset page
-      KQB.native('navigationBarMenu', {menuList: []});
+      KQB.native && KQB.native('navigationBarMenu', {menuList: []});
       return content;
     }
   });
