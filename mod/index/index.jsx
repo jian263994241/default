@@ -6,7 +6,15 @@ module.exports = React.createClass({
     return {displayName: "首页"}
   },
   componentDidMount:function(){
-    console.log(this.props);
+    var app = this.props.f7;
+    var view = this.props.f7View;
+    app.toast('demo0');
+    //
+    app.toast('demo1');
+
+    app.alert('demo2');
+    app.alert('demo3');
+    app.alert('demo4');
   },
   events: {
     inputChange: function(e) {

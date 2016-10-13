@@ -8,7 +8,9 @@ module.exports = React.createClass({
     };
   },
   componentDidMount: function() {
-    console.log(this.props);
+    var app = this.props.f7;
+    var view = this.props.f7View;
+  
   },
   post2IndexData:function(){
 

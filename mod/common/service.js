@@ -7,7 +7,7 @@ if (location.port == "8080") {
   baseUrl = "/coc-bill-api";
 } else if (location.host === 'sandbox.99bill.com') {
   //sandbox
-  baseUrl = "https://ebd-sandbox.99bill.com";
+  baseUrl = "https://ebd-sandbox.99bill.com/coc-bill-api";
 }
 
 var api = {

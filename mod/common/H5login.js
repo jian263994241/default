@@ -9,7 +9,11 @@ var ss = window.sessionStorage;
 if (location.port == "8080") {
   //本地调试走服务器代理
   baseUrl = "";
-};
+} else if (location.host === 'sandbox.99bill.com') {
+  //sandbox
+  baseUrl = "https://ebd-sandbox.99bill.com";
+}
+
 
 var ua = window.navigator.userAgent.toLowerCase();
 
