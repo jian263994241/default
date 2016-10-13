@@ -36,7 +36,7 @@ var App = React.createClass({
   }
 });
 
-window.app = ReactDOM.render(
+ReactDOM.render(
   <App/>, document.body);
 
 KQB.native("setWebviewBounce", {enableBounce: false});
