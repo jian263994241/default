@@ -36,6 +36,8 @@ var App = React.createClass({
   }
 });
 
+// 每个挂在 router.load 下的 react dom  都会  props{f7View, f7}
+
 ReactDOM.render(
   <App/>, document.body);
 
