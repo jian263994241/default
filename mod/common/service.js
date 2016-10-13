@@ -5,6 +5,9 @@ var baseUrl = "https://ebd.99bill.com/coc-bill-api";
 if (location.port == "8080") {
   //本地调试走服务器代理
   baseUrl = "/coc-bill-api";
+} else if (location.host === 'sandbox.99bill.com') {
+  //sandbox
+  baseUrl = "https://ebd-sandbox.99bill.com";
 }
 
 var api = {
