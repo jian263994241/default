@@ -1,8 +1,7 @@
-module.exports = function(virtualPage){
+module.exports = function(reactComponent){
   var app = new Framework7({
     pushState: true,
-    virtualPageRoot: "p/", //多个的时候 ["p/","m/"]
-    virtualPage: virtualPage || {}, //和 virtualPageRoot参数一起调用
+    reactComponent: reactComponent || {}, //和 virtualPageRoot参数一起调用
     preprocess:function(content, url, next){
       //reset page
       KQB.native && KQB.native('navigationBarMenu', {menuList: []});

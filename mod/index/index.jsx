@@ -6,7 +6,9 @@ module.exports = React.createClass({
     return {displayName: "首页"}
   },
   componentDidMount:function(){
+    this.pageData = this.props.pageData;
 
+    console.log(app.mainView);
   },
   events: {
     inputChange: function(e) {
@@ -23,7 +25,7 @@ module.exports = React.createClass({
   },
   render: function() {
     return (
-      <div className="page navbar-fixed" data-page="p/index.html">
+      <div className="page navbar-fixed">
         <div className="navbar">
           <div className="navbar-inner">
 

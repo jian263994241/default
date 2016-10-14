@@ -16,7 +16,7 @@ var router = {
 };
 
 window.app = createApp(router);
-window.mainView = app.addView('.view-main');
+app.mainView = app.addView('.view-main');
 
 if (location.hash == '') {
   mainView.router.load({url: 'p/index.html', animatePages: false, reload: true});

@@ -8,19 +8,23 @@ module.exports = React.createClass({
     };
   },
   componentDidMount: function() {
-    
+    this.pageData = this.props.pageData;
+
   },
   post2IndexData:function(){
 
-    this.props.f7View.router.back({
+    app.mainView.router.back({
       url:'p/index.html',
       force: true,
-      query: this
+      query: {
+        a:1
+      }
     });
+    
   },
   render: function() {
     return (
-      <div className="page navbar-fixed" data-page="p/other.html">
+      <div className="page navbar-fixed">
         <div className="navbar">
           <div className="navbar-inner">
             <div className="left">
@@ -33,7 +37,7 @@ module.exports = React.createClass({
             </div>
           </div>
         </div>
-        <div className="page-content">
+        <div className="page-content hide-bars-on-scroll">
           <div className="content-block-title">
             {this.state.displayName}
           </div>
