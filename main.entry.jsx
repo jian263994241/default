@@ -7,7 +7,7 @@ window.KQB = window.KQB || {};
 var router = {
   'p/index.html': {
     mod:require('./mod/index'),
-    title:'首页'
+    title:'数据汇总'
   },
   'p/other.html': {
     title:'other',
@@ -19,7 +19,7 @@ window.app = createApp(router);
 app.mainView = app.addView('.view-main');
 
 if (location.hash == '') {
-  mainView.router.load({url: 'p/index.html', animatePages: false, reload: true});
+  app.mainView.router.load({url: 'p/index.html', animatePages: false, reload: true});
 }
 
 
