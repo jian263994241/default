@@ -6,15 +6,7 @@ module.exports = React.createClass({
     return {displayName: "首页"}
   },
   componentDidMount:function(){
-    var app = this.props.f7;
-    var view = this.props.f7View;
-    app.toast('demo0');
-    //
-    app.toast('demo1');
 
-    app.alert('demo2');
-    app.alert('demo3');
-    app.alert('demo4');
   },
   events: {
     inputChange: function(e) {
@@ -31,7 +23,15 @@ module.exports = React.createClass({
   },
   render: function() {
     return (
-      <div className="page" data-page="p/index.html">
+      <div className="page navbar-fixed" data-page="p/index.html">
+        <div className="navbar">
+          <div className="navbar-inner">
+
+            <div className="center">
+              首页
+            </div>
+          </div>
+        </div>
         <div className="page-content">
           <div className="content-block-title text-center">
             {this.state.displayName}
