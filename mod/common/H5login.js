@@ -35,6 +35,7 @@ function appAuth(callback) {
           ss.setItem('deviceId', res.deviceId);
           method('post', {
             url: url,
+            showPreloader:false,
             data: {
               accessToken: encodeURIComponent(decodeURIComponent(accessToken)),
               deviceId: res.deviceId
@@ -56,6 +57,7 @@ function outAuth(verifyCode, callback) {
   var url = baseUrl + "/coc-bill-api/1.1/billApi/auth";
   method('post', {
     url: url,
+    showPreloader:false,
     data: {
       verifyCode: verifyCode
     },
@@ -67,6 +69,7 @@ function wxAuth(code, callback) {
   var url = baseUrl + "/coc-bill-api/wx/1.1/oauth2/oauthInfo";
   method('get', {
     url: url,
+    showPreloader:false,
     data: {
       code: code
     },
