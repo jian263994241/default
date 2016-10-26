@@ -1,7 +1,7 @@
 module.exports = function(reactComponent){
   var app = new Framework7({
     pushState: true,
-    reactComponent: reactComponent || {}, //和 virtualPageRoot参数一起调用
+    reactComponent: reactComponent || {}, 
     preprocess:function(content, url, next){
       //reset page
       KQB.native && KQB.native('navigationBarMenu', {menuList: []});
