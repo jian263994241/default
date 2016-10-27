@@ -1,3 +1,9 @@
+
+function bodyScroll(e) {
+  e.preventDefault();
+};
+
+
 module.exports = {
   // 验证登录密码 前提已满足只有特殊字符 字母和数字
   valiPassword: function(param) {
@@ -88,118 +94,7 @@ module.exports = {
       e.target.value = maxLength(e.target.value, maxLength)
     });
   },
-  /**
-   * @prams type: 'get','post'
-   * @prams opt:obj {
-   *  url:str 请求链接
-   *  data:obj (选填) ajax 数据
-   *  codes:arr (选填) 执行callback的先决条件 默认:["00"]
-   *  title:str (选填) 等待标题 默认"请等待..."
-   *  callback:fn 回调函数
-   *  loginToken:bool, (选填) 值为 true 的时候  请求header 带入 loginToken
-   *  timeout:num (选填) 超时时间 , 默认 0
-   *  errorCallback:fn (选填) 错误回调函数
-   *}
-   **/
-  ajax: function(type, opt) {
-    var app = Framework7.prototype.constructor();
-    var type = type.toLocaleUpperCase();
-    var codes = opt.codes == undefined ? ["00"] : opt.codes;
-    var title = opt.title || "请等待..."
-    var timeout = opt.timeout || 0;
-    var showPreloader = opt.showPreloader == undefined ? true : opt.showPreloader;
-    var ajaxOpt = {
-      url: opt.url,
-      method: type,
-      timeout: timeout,
-      success: successHandle,
-      error: errorHandle
-    };
-    if (opt.data) {
-      if (type === "POST") {
-        ajaxOpt.contentType = 'application/json;charset=UTF-8';
-        ajaxOpt.data = JSON.stringify(opt.data);
-      } else {
-        ajaxOpt.data = opt.data;
-      }
-    }
 
-    if (opt.loginToken) {
-      ajaxOpt.headers = {
-        Authorization: sessionStorage.loginToken
-      }
-    };
-    //other token
-    if (opt.token) {
-      ajaxOpt.headers = {
-        Authorization: sessionStorage.token
-      }
-    };
-
-    function successHandle(data, status, xhr) {
-      showPreloader && app.hidePreloader();
-      var codeIn = false;
-      try {
-        var data = JSON.parse(data);
-      } catch (e) {
-        console.log(e);
-      }
-      console.groupCollapsed(xhr.requestParameters.method, xhr.requestUrl);
-      console.log(xhr.requestUrl);
-      console.log('request:', typeof xhr.requestParameters.data == 'string' ? JSON.parse(xhr.requestParameters.data) : xhr.requestParameters.data);
-      console.log('response:', data);
-      console.groupEnd();
-      //登录失效判断
-      if (data.errCode == '03' && opt.loginToken) {
-        sessionStorage.removeItem('loginToken');
-        return app.alert(data.errMsg);
-      };
-
-      if(codes == "all"){
-        return opt.callback(data);;
-      }
-
-      codes.forEach(function(code, index) {
-        if (data.errCode === code) {
-          codeIn = true;
-        }
-      });
-
-      if (codeIn) {
-        return opt.callback(data);
-      }
-
-      return app.alert(data.errMsg);
-    };
-
-    function errorHandle(xhr, status) {
-      showPreloader && app.hidePreloader();
-      if (opt.errorCallback) {
-        return opt.errorCallback(xhr, status);
-      };
-      console.log('请求失败:', opt.url);
-      return app.toast('网络状况不太好,稍后再试');
-    };
-    showPreloader && app.showPreloader(title);
-    Dom7.ajax(ajaxOpt);
-  },
-  loadPage: function(url, success) {
-    var app = Framework7.prototype.constructor();
-    Dom7.ajax({
-      method: 'GET',
-      url: url,
-      beforeSend: function() {
-        app.showIndicator();
-      },
-      complete: function() {
-        app.hideIndicator();
-      },
-      success: success,
-      error: function() {
-        app.toast('网络异常');
-      }
-    });
-  },
   disableBounce: function() {
     document.body.addEventListener('touchmove', bodyScroll, false);
   },
@@ -213,7 +108,3 @@ module.exports = {
     return page.children[0];
   }
 }
-
-function bodyScroll(e) {
-  e.preventDefault();
-};

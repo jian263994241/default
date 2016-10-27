@@ -1,51 +1,18 @@
 var service = require("../common/service");
 var util = require("../common/util");
-
+console.log(service);
 module.exports = React.createClass({
-  getInitialState: function() {
-    return {displayName: "首页"}
-  },
-  componentDidMount:function(){
-    this.pageData = this.props.pageData;
 
-    console.log(app.mainView);
-  },
-  events: {
-    inputChange: function(e) {
-      var input = e.target;
-      this.setState({password: input.value});
-    },
-    forget: function() {
-      app.alert('建设中...');
-    },
-    submit: function(e) {
-      e.preventDefault();
-      alert(123);
-    }
-  },
   render: function() {
     return (
-      <div className="page navbar-fixed">
-        <div className="navbar">
-          <div className="navbar-inner">
-
-            <div className="center">
-              首页
-            </div>
-          </div>
+      <div className="page-content">
+        <div className="content-block-title text-center">
+          这是首页
         </div>
-        <div className="page-content">
-          <div className="content-block-title text-center">
-            {this.state.displayName}
-          </div>
-          <div className="content-block">
-            <p>
-              <a href="p/other.html">其他页</a>
-            </p>
-            <div className="content-block">
-              其他页其他页其他页其他页其他页其他页其他页其他页其他页其他页其他页其他页其他页其他页其他页其他页其他页其他页
-            </div>
-          </div>
+        <div className="content-block">
+          <p>
+            <a href="p/other.html">下一页</a>
+          </p>
         </div>
       </div>
     )
