@@ -67,6 +67,7 @@ for (key in KQB.Env){
   }
 };
 
+// service.dictInfo().then(function(data){console.log(data)})
 var dictInfo = ()=> get(api.dictInfo) ;
 var provinceCityData = ()=> post(api.provinceCityData, {appVersion, appType});
 var cityDistrictData = (city) => post(api.cityDistrictData, {appVersion, appType, city});
