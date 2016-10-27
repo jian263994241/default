@@ -1,4 +1,76 @@
-var method = require('./util').ajax;
+var method = function(type, opt) {
+  var app = Framework7.prototype.constructor();
+  var type = type.toLocaleUpperCase();
+  var codes = opt.codes || ["00"];
+  var title = opt.title || "请等待..."
+  var timeout = opt.timeout || 0;
+  var showPreloader = opt.showPreloader == undefined ? true : opt.showPreloader;
+  var ajaxOpt = {
+    url: opt.url,
+    method: type,
+    timeout: timeout,
+    success: successHandle,
+    error: errorHandle
+  };
+  if (opt.data) {
+    if (type === "POST") {
+      ajaxOpt.contentType = 'application/json;charset=UTF-8';
+      ajaxOpt.data = JSON.stringify(opt.data);
+    } else {
+      ajaxOpt.data = opt.data;
+    }
+  }
+
+  if (opt.loginToken) {
+    ajaxOpt.headers = {
+      Authorization: sessionStorage.loginToken
+    }
+  };
+  //other token
+  if (opt.token) {
+    ajaxOpt.headers = {
+      Authorization: sessionStorage.token
+    }
+  };
+
+  function successHandle(data, status, xhr) {
+    app.hidePreloader();
+    var codeIn = false;
+    try {
+      var data = JSON.parse(data);
+    } catch (e) {
+      console.log(e);
+    }
+    //登录失效判断
+    if (data.errCode == '03' && opt.loginToken) {
+      sessionStorage.removeItem('loginToken');
+      return app.alert(data.errMsg);
+    };
+
+    codes.forEach(function(code, index) {
+      if (data.errCode === code) {
+        codeIn = true;
+      }
+    });
+
+    if (codeIn) {
+      return opt.callback(data);
+    } else {
+      return app.alert(data.errMsg);
+    }
+  };
+
+  function errorHandle(xhr, status) {
+    app.hidePreloader();
+    if (opt.errorCallback) {
+      return opt.errorCallback(xhr, status);
+    };
+    console.log('请求失败:', opt.url);
+    return app.toast('网络状况不太好,稍后再试');
+  };
+  showPreloader && app.showPreloader(title);
+  Dom7.ajax(ajaxOpt);
+};
 
 var app = Framework7.prototype.constructor();
 
@@ -35,7 +107,7 @@ function appAuth(callback) {
           ss.setItem('deviceId', res.deviceId);
           method('post', {
             url: url,
-            showPreloader:false,
+            showPreloader: false,
             data: {
               accessToken: encodeURIComponent(decodeURIComponent(accessToken)),
               deviceId: res.deviceId
@@ -57,7 +129,7 @@ function outAuth(verifyCode, callback) {
   var url = baseUrl + "/coc-bill-api/1.1/billApi/auth";
   method('post', {
     url: url,
-    showPreloader:false,
+    showPreloader: false,
     data: {
       verifyCode: verifyCode
     },
@@ -69,7 +141,7 @@ function wxAuth(code, callback) {
   var url = baseUrl + "/coc-bill-api/wx/1.1/oauth2/oauthInfo";
   method('get', {
     url: url,
-    showPreloader:false,
+    showPreloader: false,
     data: {
       code: code
     },
