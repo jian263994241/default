@@ -1,6 +1,5 @@
 var service = require("../common/service");
 var util = require("../common/util");
-console.log(service);
 module.exports = React.createClass({
 
   render: function() {

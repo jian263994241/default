@@ -26,8 +26,8 @@ if (location.hash == '') {
   app.mainView.router.load({url: 'p/index.html', animatePages: false, reload: true});
 }
 
-app.login(function(loginToken){
-  alert(loginToken)
-});
+// app.login(function(loginToken){
+//   alert(loginToken)
+// });
 
 KQB.native("setWebviewBounce", {enableBounce: false});
