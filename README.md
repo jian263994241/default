@@ -25,4 +25,6 @@
 
 ## 编译
 
-- `c release prod2` - 编译&压缩&md5
+- npm server  启动dev server
+- npm start 调试+监听文件
+- npm build 编译生产文件
