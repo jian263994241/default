@@ -1,9 +1,4 @@
 
-function bodyScroll(e) {
-  e.preventDefault();
-};
-
-
 module.exports = {
   // 验证登录密码 前提已满足只有特殊字符 字母和数字
   valiPassword: function(param) {
@@ -96,11 +91,9 @@ module.exports = {
   },
 
   disableBounce: function() {
-    document.body.addEventListener('touchmove', bodyScroll, false);
+    document.body.addEventListener('touchmove', function(){e.preventDefault()}, false);
   },
-  enableBounce: function() {
-    document.body.removeEventListener('touchmove', bodyScroll, false);
-  },
+
   createContent: function(rt, props){
     var page = document.createElement('div');
     var props = props || {}
