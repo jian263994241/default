@@ -8,6 +8,7 @@ if (location.port == "8080") {
   baseUrl = "https://ebd-sandbox.99bill.com/coc-bill-api";
 }
 
+var ERROR_MSG = '网络状况不太好,请稍后再试';
 
 function get (api, data = {}){
   return new Promise(function(resolve, reject){
@@ -20,7 +21,10 @@ function get (api, data = {}){
       },
       dataType: 'json',
       success: (data, status, xhr) => resolve(data, status, xhr),
-      error: (xhr, status) => reject(xhr, status)
+      error: function (xhr, status) {
+        // reject(xhr, status)
+        window.app.toast(ERROR_MSG);
+      }
     });
   });
 }
@@ -37,7 +41,10 @@ function post (api, data = {}){
       contentType: 'application/json;charset=UTF-8',
       dataType: 'json',
       success: (data, status, xhr) => resolve(data, status, xhr),
-      error: (xhr, status) => reject(xhr, status)
+      error: function (xhr, status) {
+        // reject(xhr, status)
+        window.app.toast(ERROR_MSG);
+      }
     });
   });
 };

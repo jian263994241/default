@@ -1,8 +1,7 @@
-var util = require('./mod/common/util');
+
 var createApp = require('./mod/createApp');
 
-window.$$ = Dom7;
-window.KQB = window.KQB || {};
+window.$$ = window.Dom7;
 
 var router = {
   'p/index.html': {
@@ -19,7 +18,7 @@ var router = {
   }
 };
 
-window.app = createApp(router);
+var app = window.app = createApp(router);
 app.mainView = app.addView('.view-main');
 
 if (location.hash == '') {
@@ -30,4 +29,4 @@ if (location.hash == '') {
 //   alert(loginToken)
 // });
 
-KQB.native("setWebviewBounce", {enableBounce: false});
+window.KQB.native('setWebviewBounce', {enableBounce: false});

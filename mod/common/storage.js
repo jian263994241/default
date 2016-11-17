@@ -6,18 +6,18 @@ function copy(o, sub) {
   var key, value;
   for (key in sub) {
     value = sub[key];
-    if (typeof value === "function") {
+    if (typeof value === 'function') {
       o.__proto__[key] = value;
     } else {
       o[key] = value;
     }
   }
   return o;
-};
+}
 
 var storage = {
   set: function(key, value) {
-    if (typeof value === "string") {
+    if (typeof value === 'string') {
       this[key] = value;
     } else {
       this[key] = JSON.stringify(value);
@@ -32,7 +32,7 @@ var storage = {
     if (!value && def) {
       this.set(key, def);
       return def;
-    };
+    }
     return value;
   },
   del: function(key) {

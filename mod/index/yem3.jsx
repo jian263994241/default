@@ -1,5 +1,4 @@
-var service = require("../common/service");
-var util = require('../common/util');
+var React = window.React;
 
 module.exports = React.createClass({
   render: function() {
