@@ -26,21 +26,6 @@ module.exports = {
     }, 1000, btn);
     return btn;
   },
-  env: function() {
-    var ua = navigator.userAgent.toLowerCase();
-    return {
-      Weixin: ua.match(/MicroMessenger/i) == 'micromessenger',
-      IOS: ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1 || ua.indexOf('ipod') > -1,
-      Android: ua.indexOf('android') > -1,
-      KQ: ua.indexOf('kuaiqianbao') > -1,
-      FeiFan: ua.indexOf('feifan') > -1
-    };
-  }(),
-  getAppVersion: function() {
-    var ua = window.navigator.userAgent.toLowerCase();
-    ua.match(/kuaiqianbao\/([1-9.]+)/);
-    return RegExp.$1;
-  },
   findPosition: function(oElement) {
     var x2 = 0;
     var y2 = 0;
@@ -93,7 +78,9 @@ module.exports = {
       e.target.value = maxLength(e.target.value, maxLength);
     });
   },
+  //  *********************************
   /**
+   * method 方法 改名 $.api
    * @prams type: 'get','post'
    * @prams opt:obj {
    *  url:str 请求链接
@@ -105,73 +92,6 @@ module.exports = {
    *  timeout:num (选填) 超时时间 , 默认 0
    *}
    **/
-  ajax: function(type, opt) {
-
-    var codes = opt.codes == undefined ? ['00'] : opt.codes;
-    var app = Framework7.prototype.constructor();
-    var title = opt.title || '请等待...';
-    var timeout = opt.timeout || 0;
-    var showPreloader = opt.showPreloader || true;
-    var data = opt.data || {};
-
-    type = type.toLocaleUpperCase();
-
-    var ajaxOpt = {
-      url: opt.url,
-      method: type,
-      dataType: 'json',
-      timeout: timeout,
-      data: data,
-      headers:{
-        Authorization: sessionStorage.loginToken
-      },
-      success: successHandle,
-      error: errorHandle
-    };
-
-    if (type === 'POST') {
-      ajaxOpt.contentType = 'application/json;charset=UTF-8';
-      ajaxOpt.data = JSON.stringify(data);
-    }
-
-    function successHandle(data, status, xhr) {
-      var codeIn = false;
-      console.log('');
-      console.log(xhr.requestParameters.method, xhr.requestUrl);
-      console.log('loginToken', sessionStorage.loginToken);
-      console.log('req:', typeof xhr.requestParameters.data == 'string' ? JSON.parse(xhr.requestParameters.data) : xhr.requestParameters.data);
-      console.log('res:', data);
-      console.log('');
-
-      if(codes === 'all'){
-        return opt.callback(data);
-      }
-
-      codes.forEach(function(code) {
-        if (data.errCode === code) {
-          codeIn = true;
-        }
-      });
-
-      app.hidePreloader();
-
-      if (codeIn) {
-        return opt.callback(data);
-      }else if(data.errCode === '03'){
-        //登录失效判断
-        sessionStorage.removeItem('loginToken');
-      }
-
-      return app.toast(data.errMsg);
-    }
-
-    function errorHandle() {
-      app.hidePreloader();
-      return app.toast('网络状况不太好,请稍后再试');
-    }
-
-    showPreloader && app.showPreloader(title);
-    Dom7.ajax(ajaxOpt);
-  }
+  //  *********************************
 
 };
