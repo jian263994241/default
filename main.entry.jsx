@@ -22,7 +22,7 @@ var app = window.app = createApp(router);
 app.mainView = app.addView('.view-main');
 
 if (location.hash == '') {
-  app.mainView.router.load({url: 'p/index.html', animatePages: false, reload: true});
+  app.mainView.router.load({url: 'p/index.html', animatePages: false, pushState: false});
 }
 
 // app.login(function(loginToken){
