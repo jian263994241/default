@@ -6,7 +6,7 @@ module.exports = function(reactComponent){
     // pushState: false,
     reactComponent: reactComponent || {},
     preprocess:function(content){
-      KQB.native && KQB.native('navigationBarMenu', {menuList: []});
+      // KQB.native('navigationBarMenu', {menuList: []});
       return content;
     }
   });

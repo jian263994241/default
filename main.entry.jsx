@@ -29,4 +29,4 @@ if (location.hash == '') {
 //   alert(loginToken)
 // });
 
-window.KQB.native('setWebviewBounce', {enableBounce: false});
+// window.KQB.native('setWebviewBounce', {enableBounce: false});
