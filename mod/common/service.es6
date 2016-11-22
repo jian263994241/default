@@ -22,7 +22,7 @@ for (var key in api) {
 
 var method = function(type, opt){
   opt.debug = debug;
-  $.api(type, opt);
+  Dom7.api(type, opt);
 };
 
 // var ERROR_MSG = '网络状况不太好,请稍后再试';

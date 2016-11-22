@@ -1,4 +1,4 @@
-var method = require('./util').ajax;
+var method = Dom7.api;
 
 var KQB = window.KQB, Framework7 = window.Framework7, $ = window.Dom7;
 
