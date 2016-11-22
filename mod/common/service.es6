@@ -1,33 +1,29 @@
-var method = $.api;
-var baseUrl = "https://ebd.99bill.com/coc-bill-api";
+var encryptByDES = window.encryptByDES;
+var baseUrl = 'https://ebd.99bill.com/coc-bill-api';
+var debug = false;
 
-if (location.port == "8080") {
+if (location.port == '8080') {
   //本地调试走服务器代理
-  baseUrl = "/coc-bill-api";
+  baseUrl = '/coc-bill-api';
+  debug = true;
 } else if (location.host === 'sandbox.99bill.com') {
   //sandbox
-  baseUrl = "https://ebd-sandbox.99bill.com/coc-bill-api";
+  baseUrl = 'https://ebd-sandbox.99bill.com/coc-bill-api';
 }
 
 var api = {
   coupons: '/1.0/crt/coupons', //T0040001L 券列表查询
 };
 
-var key,value;
-
-for (key in api) {
-  value = api[key];
+for (var key in api) {
+  var value = api[key];
   api[key] = baseUrl + value;
 }
 
-var appType ,appVersion;
-
-for (key in KQB.Env){
-  if(KQB.Env[key] == true){
-    appVersion = appType = key ;
-  }
+var method = function(type, opt){
+  opt.debug = debug;
+  $.api(type, opt);
 };
-
 
 // var ERROR_MSG = '网络状况不太好,请稍后再试';
 
@@ -72,8 +68,7 @@ for (key in KQB.Env){
 
 // service.dictInfo().then(function(data){console.log(data)})
 
-// var coupons = (data)=> get(api.coupons, data) ;
-
+// var coupons = (data)=> get(api.coupons, data);
 
 // module.exports = { coupons }
 
