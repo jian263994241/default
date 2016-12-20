@@ -1,6 +1,5 @@
-var React = window.React;
 
-module.exports = React.createClass({
+var index = React.createClass({
 
   render: function() {
     return (
@@ -17,3 +16,6 @@ module.exports = React.createClass({
     );
   }
 });
+
+
+module.exports = index;

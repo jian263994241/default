@@ -1,6 +1,5 @@
-var React = window.React;
 
-module.exports = React.createClass({
+var other = React.createClass({
   render: function() {
     return (
       <div className="page-content hide-bars-on-scroll">
@@ -12,7 +11,7 @@ module.exports = React.createClass({
             <a className="back" href="">返回</a>
           </p>
         </div>
-        <img src={__uri('/res/images/logo-new.png')} alt=""/>
+        <img src={__uri('/res/images/logo-new@2x.png')} alt=""/>
         <p>
           <a href="p/other2.html">下一页</a>
         </p>
@@ -21,3 +20,6 @@ module.exports = React.createClass({
   }
 
 });
+
+
+module.exports =  other;

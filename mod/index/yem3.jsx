@@ -1,6 +1,6 @@
-var React = window.React;
 
-module.exports = React.createClass({
+var yum3 = React.createClass({
+  
   render: function() {
     return (
       <div className="page-content hide-bars-on-scroll">
@@ -12,3 +12,6 @@ module.exports = React.createClass({
   }
 
 });
+
+
+module.exports = yum3;
