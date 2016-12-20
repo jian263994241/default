@@ -1,11 +1,11 @@
 var encryptByDES = window.encryptByDES;
 var baseUrl = 'https://ebd.99bill.com/coc-bill-api';
-var debug = false;
+
 
 if (location.port == '8080') {
   //本地调试走服务器代理
   baseUrl = '/coc-bill-api';
-  debug = true;
+
 } else if (location.host === 'sandbox.99bill.com') {
   //sandbox
   baseUrl = 'https://ebd-sandbox.99bill.com/coc-bill-api';
@@ -20,57 +20,15 @@ for (var key in api) {
   api[key] = baseUrl + value;
 }
 
-var method = function(type, opt){
-  opt.debug = debug;
-  Dom7.api(type, opt);
-};
+var method = Dom7.api;
 
-// var ERROR_MSG = '网络状况不太好,请稍后再试';
-
-// function get (api, data = {}){
-//   return new Promise(function(resolve, reject){
-//     $$.ajax({
-//       method: "GET",
-//       url: api,
-//       data: data,
-//       headers: {
-//         Authorization: sessionStorage.loginToken
-//       },
-//       dataType: 'json',
-//       success: (data, status, xhr) => resolve(data, status, xhr),
-//       error: function (xhr, status) {
-//         // reject(xhr, status)
-//         window.app.toast(ERROR_MSG);
-//       }
-//     });
-//   });
-// }
+// business
 //
-// function post (api, data = {}){
-//   return new Promise(function(resolve, reject) {
-//     $$.ajax({
-//       method: "POST",
-//       url: api,
-//       data: JSON.stringify(data),
-//       headers: {
-//         Authorization: sessionStorage.loginToken
-//       },
-//       contentType: 'application/json;charset=UTF-8',
-//       dataType: 'json',
-//       success: (data, status, xhr) => resolve(data, status, xhr),
-//       error: function (xhr, status) {
-//         // reject(xhr, status)
-//         window.app.toast(ERROR_MSG);
-//       }
-//     });
-//   });
-// };
-
-// service.dictInfo().then(function(data){console.log(data)})
-
-// var coupons = (data)=> get(api.coupons, data);
-
-// module.exports = { coupons }
+// 业务场景
+//
+// AM-KLL	快利来
+// VAS-GOLD-INTEREST	黄金权益
+// MKT-CRT-PKG 卡券包
 
 module.exports = {
   quotaPreJudge: function(data, callback) {
@@ -78,6 +36,7 @@ module.exports = {
       url: api.quotaPreJudge,
       loginToken: true,
       callback: callback,
+      // business: 'AM-KLL',
       data: {
         merchantCode: data.merchantCode,
         channelType: data.channelType,
