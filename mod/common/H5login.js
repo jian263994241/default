@@ -1,12 +1,11 @@
 var method = Dom7.api;
 
-var KQB = window.KQB, Framework7 = window.Framework7, $ = window.Dom7;
-
 var app = Framework7.prototype.constructor();
 
-var baseUrl = 'https://ebd.99bill.com';
+var baseUrl = "https://ebd.99bill.com";
 
 var ss = window.sessionStorage;
+
 
 if (location.port == '8080') {
   //本地调试走服务器代理
@@ -29,7 +28,7 @@ var isWeixin = function() {
 
 function appAuth(callback) {
   var url = baseUrl + '/coc-bill-api/1.0/app/auth';
-  KQB.native('login', {
+  kuaiqian.native("login", {
     success: function(res) {
       var accessToken = res.accessToken;
       KQB.native('getDeviceId', {
@@ -37,7 +36,6 @@ function appAuth(callback) {
           ss.setItem('deviceId', res.deviceId);
           method('post', {
             url: url,
-            showPreloader: false,
             data: {
               accessToken: encodeURIComponent(decodeURIComponent(accessToken)),
               deviceId: res.deviceId
@@ -48,40 +46,38 @@ function appAuth(callback) {
         error: function() {}
       });
     },
-    error: function() {
+    error: function(res) {
       app.toast('登录失败');
     }
   });
 
-}
+};
 
 function outAuth(verifyCode, callback) {
-  var url = baseUrl + '/coc-bill-api/1.1/billApi/auth';
+  var url = baseUrl + "/coc-bill-api/1.1/billApi/auth";
   method('post', {
     url: url,
-    showPreloader: false,
     data: {
       verifyCode: verifyCode
     },
     callback: callback
   });
-}
+};
 
 function wxAuth(code, callback) {
-  var url = baseUrl + '/coc-bill-api/wx/1.1/oauth2/oauthInfo';
+  var url = baseUrl + "/coc-bill-api/wx/1.1/oauth2/oauthInfo";
   method('get', {
     url: url,
-    showPreloader: false,
     data: {
       code: code
     },
     callback: callback
   });
-}
+};
 
 module.exports = function(callback, errCallback) {
-  var loginToken = ss.getItem('loginToken');
-  var urlQuery = $.parseUrlQuery(location.search);
+  var loginToken = ss.getItem("loginToken");
+  var urlQuery = Dom7.parseUrlQuery(location.search);
 
   var next = function(data) {
     ss.setItem('loginToken', data.loginToken);
@@ -93,18 +89,18 @@ module.exports = function(callback, errCallback) {
       errCallback();
     } else {
       // app.alert("未登录,请登录后再试");
-      var nextPage = '&nextPage=' + encodeURIComponent(location.href);
-      window.location.assign('https://www.99bill.com/seashell/webapp/billtrunk2/sign.html?tab=in' + nextPage);
+      var nextPage = "&nextPage=" + encodeURIComponent(location.href);
+      window.location.assign('/seashell/webapp/billtrunk2/sign.html?tab=in' + nextPage);
     }
   };
 
   if (loginToken) {
     return callback(loginToken);
-  }
+  };
 
   if (isKuaiQianBao()) {
     return appAuth(next);
-  }
+  };
 
   if (isWeixin() && urlQuery.code) {
     return wxAuth(urlQuery.code, function(data) {
@@ -115,7 +111,7 @@ module.exports = function(callback, errCallback) {
         err();
       }
     });
-  }
+  };
 
   if (urlQuery.verifyCode) {
     return outAuth(urlQuery.verifyCode, next);
