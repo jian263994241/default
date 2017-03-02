@@ -2,7 +2,7 @@ import style from './riskrating.css.lessm'
 import {Component} from 'react'
 import Qat from './questionTmpl'
 
-class q2 extends Component {
+class Q2 extends Component {
   static defaultProps = {
     q:'您是否有信用卡',
     a:['没有信用卡','额度5万以上','额度2万至5万','额度1万至2万', '额度5千至1万', '额度5千以下'],
@@ -26,4 +26,4 @@ class q2 extends Component {
 }
 
 
-export default q2;
+export default Q2;

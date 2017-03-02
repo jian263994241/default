@@ -10,7 +10,7 @@ var router = {
   'index/*': {
     getMods : function(app, url, cb){
       app.showIndicator();
-      $.getScript(__uri('/index/routes.js'), ()=>{
+      $.getScript(__uri('/index/index.js'), ()=>{
         app.hideIndicator();
         cb(null, require('index').default);
       });
@@ -19,7 +19,7 @@ var router = {
   'grade/*':{
     getMods : function(app, url, cb){
       app.showIndicator();
-      $.getScript(__uri('/grade/routes.js'), ()=>{
+      $.getScript(__uri('/grade/index.js'), ()=>{
         app.hideIndicator();
         cb(null, require('grade').default);
       });

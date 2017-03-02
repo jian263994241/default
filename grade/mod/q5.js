@@ -2,14 +2,15 @@ import style from './riskrating.css.lessm'
 import {Component} from 'react'
 import Qat from './questionTmpl'
 
-class q4 extends Component {
+class Q5 extends Component {
   static defaultProps = {
-    q:'您是否有缴纳公积金',
-    a:['没有缴纳公积金','每月缴纳2500元以上','每月缴纳2000元至2500元','每月缴纳1000元至2000元', '每月缴纳500元至1000元', '每月缴纳500元以下'],
+    q:'您的最高学历',
+    a:['博士','研究生','本科','大科', '高中(含高职)', '初中', '小学'],
     i: '5'
   }
   answerChange = (name, value)=>{
-    
+    const {router} = this.props;
+    router.load({url:'grade/end'});
   }
   render(){
     return (
@@ -25,4 +26,4 @@ class q4 extends Component {
 }
 
 
-export default q4;
+export default Q5;

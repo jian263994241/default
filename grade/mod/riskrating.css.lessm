@@ -60,11 +60,11 @@
 /*common func====end*/
 
 .intro {
-	height: 330px;
 	position: relative;
+	margin-bottom: 20px;
+	padding: 40px 0 30px;
 	background-color: #fff;
 	text-align: center;
-	margin-bottom: 12px;
 	&:after {
 		.border-bottom();
 	}
@@ -84,25 +84,25 @@
 		margin-bottom: 30px;
 	}
 	.icon {
-		width: 83px;
-		height: 83px;
+		width: 90px;
+		height: 90px;
+		background: url(https://img.99bill.com/res/i/sprite-main_e07f67eac458.png) 8px 0 no-repeat;
+		background-size: 83px auto;
 		vertical-align: top;
-		background: url("/img/sprite-main.png") 1000px 1000px no-repeat;
-		background-size: 100px auto;
 		&.icon-r1 {
 			background-position: 0 0;
 		}
 		&.icon-r2 {
-			background-position: 0 -90px;
+			background-position: 0 -94px;
 		}
 		&.icon-r3 {
-			background-position: 0 -180px;
+			background-position: 0 -188px;
 		}
 		&.icon-r4 {
-			background-position: 0 -270px;
+			background-position-y: -375px;
 		}
 		&.icon-r5 {
-			background-position: 0 -360px;
+			background-position: 0 -281px;
 		}
 	}
 }

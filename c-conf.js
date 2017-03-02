@@ -15,7 +15,7 @@ fis.match('app.js', {
   })
 })
 
-fis.match('grade/routes.js',{
+fis.match('grade/index.js',{
   parser: fis.plugin('browserify',{
     option:{
       expose:'grade',
@@ -24,7 +24,7 @@ fis.match('grade/routes.js',{
   })
 })
 
-fis.match('index/routes.js',{
+fis.match('index/index.js',{
   parser: fis.plugin('browserify',{
     option:{
       expose:'index',

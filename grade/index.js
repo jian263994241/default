@@ -5,6 +5,8 @@ import q2 from './mod/q2'
 import q3 from './mod/q3'
 import q4 from './mod/q4'
 import q5 from './mod/q5'
+import end from './mod/end'
+
 
 const title = '财力测评'
 
@@ -28,6 +30,10 @@ const route = {
   'q/5': {
     title: title,
     mod : q5
+  },
+  'end': {
+    title: title,
+    mod : end
   }
 };
 

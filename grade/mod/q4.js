@@ -2,10 +2,10 @@ import style from './riskrating.css.lessm'
 import {Component} from 'react'
 import Qat from './questionTmpl'
 
-class q4 extends Component {
+class Q4 extends Component {
   static defaultProps = {
-    q:'您是否有缴纳公积金',
-    a:['没有缴纳公积金','每月缴纳2500元以上','每月缴纳2000元至2500元','每月缴纳1000元至2000元', '每月缴纳500元至1000元', '每月缴纳500元以下'],
+    q:'您是否有车险保单',
+    a:['没有车险保单','保单金额1万以上','保单金额5千至1万元','保单金额3千至5千元', '保单金额1千至3千元', '保单金额1千元以下'],
     i: '4'
   }
   answerChange = (name, value)=>{
@@ -26,4 +26,4 @@ class q4 extends Component {
 }
 
 
-export default q4;
+export default Q4;
