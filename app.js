@@ -1,0 +1,52 @@
+
+import {render} from 'react-dom'
+
+
+
+const $ = window.Dom7;
+
+
+var router = {
+  'index/*': {
+    getMods : function(app, url, cb){
+      app.showIndicator();
+      $.getScript(__uri('/index/routes.js'), ()=>{
+        app.hideIndicator();
+        cb(null, require('index').default);
+      });
+    }
+  },
+  'grade/*':{
+    getMods : function(app, url, cb){
+      app.showIndicator();
+      $.getScript(__uri('/grade/routes.js'), ()=>{
+        app.hideIndicator();
+        cb(null, require('grade').default);
+      });
+    }
+  }
+};
+
+
+
+render((
+  <div className="views">
+    <div className="view view-main">
+      <div className="pages"></div>
+    </div>
+  </div>
+), $('.framework7-root')[0], ()=>{
+
+  window.KQB.native('setWebviewBounce', {enableBounce: false});
+
+  window.app = new Framework7({
+    reactComponent: router
+  });
+
+  app.mainView = app.addView('.view-main');
+
+  if (location.hash == '') {
+    app.mainView.router.load({url: 'index/demo', animatePages: false, reload: true});
+  }
+
+})
