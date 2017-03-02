@@ -1,7 +1,8 @@
 var shims = {
   'react': 'global.React',
   'react-dom': 'global.ReactDOM',
-  'react-router': 'global.ReactRouter'
+  'react-router': 'global.ReactRouter',
+  'react-redux': 'global.ReactRedux'
 }
 
 
