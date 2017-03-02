@@ -9,14 +9,15 @@ class q2 extends Component {
     i: '2'
   }
   answerChange = (name, value)=>{
-    console.log(name, value);
+    const {router} = this.props;
+    router.load({url:'grade/q/3'});
   }
   render(){
     return (
       <div className="page-content">
         <Qat question={this.props.q} questionIndex={this.props.i} answer={this.props.a} onChange={this.answerChange}/>
         <div className={style.next}>
-            <a href="#" className="back">上一题</a>
+            <a href={`grade/q/${this.props.i - 1}`} className="back" data-force="true">上一题</a>
             <div className={style.total}>{this.props.i}/5</div>
         </div>
       </div>

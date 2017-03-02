@@ -1,8 +1,6 @@
 
 import Demo from './mod/demo/index';
 
-
-
 const route = {
   'demo': {
     title:'首页',

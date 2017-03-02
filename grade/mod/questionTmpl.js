@@ -12,7 +12,7 @@ class Question extends PureComponent {
     this.inputChangeHandler = (name, value) => this.props.onChange(name, value);
   }
 
-  static aIndex = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+  static aIndex = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 
   render(){
 
