@@ -40,7 +40,8 @@ render((
   window.KQB.native('setWebviewBounce', {enableBounce: false});
 
   window.app = new Framework7({
-    reactComponent: router
+    reactComponent: router,
+    root:'.framework7-root'
   });
 
   app.mainView = app.addView('.view-main');
