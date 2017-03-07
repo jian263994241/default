@@ -6,7 +6,7 @@ import {render} from 'react-dom'
 const $ = window.Dom7;
 
 
-var router = {
+const router = {
   'index/*': {
     getMods : function(app, url, cb){
       app.showIndicator();
@@ -36,8 +36,6 @@ render((
     </div>
   </div>
 ), $('.framework7-root')[0], ()=>{
-
-  window.KQB.native('setWebviewBounce', {enableBounce: false});
 
   window.app = new Framework7({
     reactComponent: router,
