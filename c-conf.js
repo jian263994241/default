@@ -10,19 +10,12 @@ fis.match('app.js', {
   parser: fis.plugin('browserify',{
     option:{
       shims: shims,
-      externals:['grade', 'index']
+      externals:['index']
     }
   })
 })
 
-fis.match('grade/index.js',{
-  parser: fis.plugin('browserify',{
-    option:{
-      expose:'grade',
-      shims: shims
-    }
-  })
-})
+
 
 fis.match('index/index.js',{
   parser: fis.plugin('browserify',{
