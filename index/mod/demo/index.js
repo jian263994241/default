@@ -16,7 +16,7 @@ class Demo extends Component {
           首页
         </div>
         <div className="content-block">
-          <a href="grade/q/1" className="button">问卷</a>
+          <a href="" className="button">问卷</a>
         </div>
       </div>
     );
