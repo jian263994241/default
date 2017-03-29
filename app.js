@@ -7,20 +7,6 @@ const $ = window.Dom7;
 
 
 const router = {
-  //用法2 路由配置在模块内
-  // 'index/*': {
-  //   //异步用法
-  //   // getMods : function(app, url, cb){
-  //   //   app.showIndicator();
-  //   //   $.getScript(__uri('/index/index.js'), ()=>{
-  //   //     app.hideIndicator();
-  //   //     cb(null, require('index').default);
-  //   //   });
-  //   // }
-  //   //同步用法
-  //   // childRoutes : require('./index').default
-  // }
-
   //用法1 : 经典用法
   'index/demo':{
     title:'demo',
