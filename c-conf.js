@@ -1,8 +1,12 @@
+var path = require('path');
+
+fis.project.setProjectRoot(path.join(process.cwd(), '/src'));
+
+
 var shims = {
   'react': 'global.React',
   'react-dom': 'global.ReactDOM',
-  'react-router': 'global.ReactRouter',
-  'react-redux': 'global.ReactRedux'
+  'wonder': 'window.WONDER'
 }
 
 
