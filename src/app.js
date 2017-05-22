@@ -1,16 +1,15 @@
-
+import React, {Component} from 'react'
 import {render} from 'react-dom'
 
+import Demo from './mod/demo'
 
-
-const $ = window.Dom7;
+window.$ = window.Dom7;
 
 
 const router = {
-  //用法1 : 经典用法
   'index/demo':{
     title:'demo',
-    mod: require('./index/mod/demo').default
+    mod: Demo
   }
 };
 

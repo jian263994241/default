@@ -1,4 +1,4 @@
-import {Component} from 'react'
+import React, {Component} from 'react'
 
 class Demo extends Component {
   static defaultProps = {
@@ -12,11 +12,10 @@ class Demo extends Component {
   render(){
     return (
       <div className="page-content">
-        <div className="content-block-title">
-          首页
-        </div>
-        <div className="content-block">
-          <a href="" className="button">问卷</a>
+        <Qat question={this.props.q} questionIndex={this.props.i} answer={this.props.a} onChange={this.answerChange}/>
+        <div className={style.next}>
+            <a href="#" className="back">上一题</a>
+            <div className={style.total}>{this.props.i}/5</div>
         </div>
       </div>
     );
