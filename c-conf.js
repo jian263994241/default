@@ -1,9 +1,9 @@
-var path = require('path');
+const path = require('path');
 
 fis.project.setProjectRoot(path.join(process.cwd(), '/src'));
 
 
-var shims = {
+const shims = {
   'react': 'global.React',
   'react-dom': 'global.ReactDOM',
   'wonder': 'window.WONDER'
