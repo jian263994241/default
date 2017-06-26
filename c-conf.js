@@ -22,11 +22,13 @@ fis.match('app.js', {
 const exec = require('child_process').exec;
 
 fis.on('release:end', function(file){
-  exec('tar -cvf release.zip ' + '_build/', (err, stdout, stderr) => {
-    if (err) {
-      console.error(err);
-      return;
-    }
-    console.log(stdout);
-  })
+  if(fis.project.currentMedia() === 'prod2'){
+    exec('tar -cvf release.zip ' + '_build/', (err, stdout, stderr) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      console.log(stdout);
+    })
+  }
 })
