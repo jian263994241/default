@@ -19,3 +19,14 @@ fis.match('app.js', {
 })
 
 
+fis.media('prod2').match('*', {
+  domain: 'https://img.99bill.com',
+  deploy: [
+    fis.plugin('zip', {
+      filename : 'release.zip'
+    }),
+    fis.plugin('local-deliver', {
+      to: './_build'
+    })  
+  ]
+})
