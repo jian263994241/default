@@ -1,27 +1,16 @@
 import React, {Component} from 'react'
+import {render} from 'react-dom'
+import {Page, PageContent} from 'wonder'
 
-class Demo extends Component {
-  static defaultProps = {
-    q:'您是否有房贷',
-    a:['没有房贷','月供2万以上','月供1万至2万','月供5千至1万', '月供2千至5千', '月供2千以下'],
-    i: '1'
-  }
-  answerChange = (name, value)=>{
-    console.log(name, value);
-  }
-  render(){
+export default class OtherPage extends Component {
+  render() {
     return (
-      <div className="page-content">
-        <div className="content-block-title">
-          首页
-        </div>
-        <div className="content-block">
-          <a href="" className="button">问卷</a>
-        </div>
-      </div>
+      <Page title="更多页面">
+        <PageContent>
+          //render
+          //div.page-content
+        </PageContent>
+      </Page>
     );
   }
 }
-
-
-export default Demo;

@@ -1,26 +1,44 @@
 import React, {Component} from 'react'
+import {render} from 'react-dom'
+import {Page, PageContent, mobxReact, Button, ContentBlock, ContentBlockTitle, Grid, Link} from 'wonder'
 
-class Demo extends Component {
-  static defaultProps = {
-    q:'您是否有房贷',
-    a:['没有房贷','月供2万以上','月供1万至2万','月供5千至1万', '月供2千至5千', '月供2千以下'],
-    i: '1'
+const {inject,observer} = mobxReact;
+const {Row, Col} = Grid;
+
+@inject('UIState')
+@inject('AppStore')
+@observer
+export default class IndexPage extends Component {
+
+  showPreloader = ()=>{
+    const {UIState} = this.props;
+    UIState.showPreloader = true;
+
+    setTimeout(()=>{
+      UIState.showPreloader = false;
+    }, 1000);
   }
-  answerChange = (name, value)=>{
-    console.log(name, value);
-  }
-  render(){
+
+  render() {
     return (
-      <div className="page-content">
-        <Qat question={this.props.q} questionIndex={this.props.i} answer={this.props.a} onChange={this.answerChange}/>
-        <div className={style.next}>
-            <a href="#" className="back">上一题</a>
-            <div className={style.total}>{this.props.i}/5</div>
-        </div>
-      </div>
+      <Page title="首页">
+        <PageContent>
+          <ContentBlockTitle>
+            首页
+          </ContentBlockTitle>
+          <ContentBlock>
+            <Row>
+              <Col>
+                <Button onClick={this.showPreloader}>showPreloader</Button>
+              </Col>
+              <Col>
+                <Link to="other">下一页</Link>
+              </Col>
+            </Row>
+
+          </ContentBlock>
+        </PageContent>
+      </Page>
     );
   }
 }
-
-
-export default Demo;

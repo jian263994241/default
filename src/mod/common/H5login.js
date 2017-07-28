@@ -1,11 +1,8 @@
-var method = Dom7.api;
+import {kq, Modal} from 'wonder'
 
-var app = Framework7.prototype.constructor();
-
-var baseUrl = "https://ebd.99bill.com";
-
-var ss = window.sessionStorage;
-
+const method = kq.api;
+const ss = window.sessionStorage;
+let baseUrl = "https://ebd.99bill.com";
 
 if (location.port == '8080') {
   //本地调试走服务器代理
@@ -16,19 +13,17 @@ if (location.port == '8080') {
 }
 
 
-var ua = window.navigator.userAgent.toLowerCase();
-
 var isKuaiQianBao = function() {
-  return Boolean(ua.indexOf('kuaiqianbao') > -1);
+  return kq.Env.KQ;
 };
 
 var isWeixin = function() {
-  return Boolean(ua.indexOf('micromessenger') > -1);
+  return kq.Env.Weixin;
 };
 
 function appAuth(callback) {
   var url = baseUrl + '/coc-bill-api/1.0/app/auth';
-  kuaiqian.native("login", {
+  KQB.native("login", {
     success: function(res) {
       var accessToken = res.accessToken;
       KQB.native('getDeviceId', {
@@ -47,7 +42,7 @@ function appAuth(callback) {
       });
     },
     error: function(res) {
-      app.toast('登录失败');
+      Modal.toast('登录失败');
     }
   });
 
@@ -59,9 +54,8 @@ function outAuth(verifyCode, callback) {
     url: url,
     data: {
       verifyCode: verifyCode
-    },
-    callback: callback
-  });
+    }
+  }).then(callback);
 };
 
 function wxAuth(code, callback) {
@@ -70,9 +64,8 @@ function wxAuth(code, callback) {
     url: url,
     data: {
       code: code
-    },
-    callback: callback
-  });
+    }
+  }).then(callback);
 };
 
 module.exports = function(callback, errCallback) {
@@ -89,8 +82,8 @@ module.exports = function(callback, errCallback) {
       errCallback();
     } else {
       // app.alert("未登录,请登录后再试");
-      var nextPage = "&nextPage=" + encodeURIComponent(location.href);
-      window.location.assign('/seashell/webapp/billtrunk2/sign.html?tab=in' + nextPage);
+      var nextPage = "nextPage=" + encodeURIComponent(location.href);
+      window.location.assign('/seashell/webapp/billtrunk/default.html?' + nextPage);
     }
   };
 

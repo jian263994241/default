@@ -1,36 +1,33 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom'
+import {App, View, Pages, Preloader, mobxReact} from 'wonder'
 
-import Demo from './mod/demo'
+import UIState from './mod/store/UIState'
+import AppStore from './mod/store/AppStore'
 
-window.$ = window.Dom7;
+import IndexPage from './mod/index'
+import OtherPage from './mod/demo'
 
+const {observer, Provider} = mobxReact;
 
-const router = {
-  'index/demo':{
-    title:'demo',
-    mod: Demo
+const stores = {UIState, AppStore};
+
+@observer
+class Entry extends Component {
+
+  render() {
+    return (
+      <Provider {...stores}>
+        <App>
+          <View type="hash">
+            <Pages exact path="/" component={IndexPage}/>
+            <Pages path="/other" component={OtherPage}/>
+          </View>
+          <Preloader visible={UIState.showPreloader}></Preloader>
+        </App>
+      </Provider>
+    );
   }
-};
+}
 
-
-// render((
-//   <div className="views">
-//     <div className="view view-main">
-//       <div className="pages"></div>
-//     </div>
-//   </div>
-// ), $('.framework7-root')[0], ()=>{
-//
-//   window.app = new Framework7({
-//     reactComponent: router,
-//     root:'.framework7-root'
-//   });
-//
-//   app.mainView = app.addView('.view-main');
-//
-//   if (location.hash == '') {
-//     app.mainView.router.load({url: 'index/demo', animatePages: false, reload: true});
-//   }
-//
-// })
+render(<Entry/>, document.querySelector('.root'));

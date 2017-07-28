@@ -1,51 +1,39 @@
-var encryptByDES = window.encryptByDES;
-var baseUrl = 'https://ebd.99bill.com/coc-bill-api';
+import {kq} from 'wonder'
 
+const encryptByDES = window.encryptByDES;
 
-if (location.port == '8080') {
-  //本地调试走服务器代理
-  baseUrl = '/coc-bill-api';
+let domain = "";
 
-} else if (location.host === 'sandbox.99bill.com') {
+if (location.host === 'sandbox.99bill.com') {
   //sandbox
-  baseUrl = 'https://ebd-sandbox.99bill.com/coc-bill-api';
+  domain = 'https://sandbox.99bill.com';
 }
 
-var api = {
-  coupons: '/1.0/crt/coupons', //T0040001L 券列表查询
-};
-
-for (var key in api) {
-  var value = api[key];
-  api[key] = baseUrl + value;
+if (location.host === 'www.99bill.com') {
+  //sandbox
+  domain = 'https://ebd.99bill.com';
 }
 
-var method = Dom7.api;
+const ajax = function({url, ...other}){
+  const api = kq.api({
+    url: domain + url,
+    business: 'MEMBER-BASE',
+    ...other
+  });
+  return api;
+}
 
-// business
-//
-// 业务场景
-//
-// AM-KLL	快利来
-// VAS-GOLD-INTEREST	黄金权益
-// MKT-CRT-PKG 卡券包
+const API = {
+  login: '/coc-bill-api/mam/3.0/members/password/login', //登录
+}
 
-module.exports = {
-  quotaPreJudge: function(data, callback) {
-    method('post', {
-      url: api.quotaPreJudge,
-      loginToken: true,
-      callback: callback,
-      // business: 'AM-KLL',
-      data: {
-        merchantCode: data.merchantCode,
-        channelType: data.channelType,
-        outTradeNo: data.outTradeNo,
-        payAmount: data.payAmount,
-        payMode: data.payMode,
-        sysVersion: 'v1.0.1'
-      },
-      codes: ['00', '34']
-    });
-  }
-};
+
+export function login (data) {
+  const idContent = encryptByDES(data.idContent);
+  const password = encryptByDES(data.password);
+  return ajax({
+    method: 'post',
+    url: API.login,
+    data:{idContent, password}
+  });
+}
