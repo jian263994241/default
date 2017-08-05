@@ -6,7 +6,6 @@ const {inject,observer} = mobxReact;
 const {Row, Col} = Grid;
 
 @inject('UIState')
-@inject('AppStore')
 @observer
 export default class IndexPage extends Component {
 

@@ -3,14 +3,13 @@ import {render} from 'react-dom'
 import {App, View, Pages, Preloader, mobxReact} from 'wonder'
 
 import UIState from './mod/store/UIState'
-import AppStore from './mod/store/AppStore'
 
 import IndexPage from './mod/index'
 import OtherPage from './mod/demo'
 
 const {observer, Provider} = mobxReact;
 
-const stores = {UIState, AppStore};
+const stores = {UIState};
 
 @observer
 class Entry extends Component {
