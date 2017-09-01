@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom'
-import {App, View, Pages, Preloader, mobxReact} from 'wonder'
+import {App, View, Pages, Preloader, mobxReact, classnames} from 'wonder'
 
 import UIState from './mod/store/UIState'
 
@@ -17,7 +17,7 @@ class Entry extends Component {
   render() {
     return (
       <Provider {...stores}>
-        <App>
+        <App className={classnames({ 'theme-blue': UIState.isFefan })}>
           <View type="hash">
             <Pages exact path="/" component={IndexPage}/>
             <Pages path="/other" component={OtherPage}/>
