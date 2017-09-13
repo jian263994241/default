@@ -83,7 +83,7 @@ module.exports = function(callback, errCallback) {
     } else {
       // app.alert("未登录,请登录后再试");
       var nextPage = "nextPage=" + encodeURIComponent(location.href);
-      window.location.assign('/seashell/webapp/billtrunk/default.html?' + nextPage);
+      window.location.assign('https://www.99bill.com/seashell/webapp/billtrunk/sign.html?' + nextPage);
     }
   };
 
