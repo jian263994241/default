@@ -1,4 +1,3 @@
-
 import {mobx, kq, dom as $} from 'wonder';
 
 const {observable} = mobx;
@@ -15,7 +14,15 @@ class UIState {
 
   @observable title = '';
 
+  @observable step = -1;
+
 }
 
+const state = new UIState;
 
-export default new UIState;
+export default state;
+
+
+window.onunhandledrejection = function(){
+  state.showPreloader = false;
+};
