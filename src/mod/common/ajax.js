@@ -1,4 +1,5 @@
-import {Modal} from 'wonder'
+import {Modal} from 'wonder';
+import UIState from '../store/UIState';
 
 let domain = "";
 
@@ -15,12 +16,19 @@ const ajax = function({url, prefix = '/coc-bill-api', ...rest}){
   const api = kqlib.api({
     url: domain + prefix + url,
     business: 'MEMBER-BASE',
+    beforeSend(xhr){
+      UIState.showPreloader = true;
+    },
+    complete(xhr, status){
+      UIState.showPreloader = false;
+    },
     ...rest
   });
   return api;
 }
 
 window.onAPIErrorHandler = function(data, status, xhr){
+  UIState.showPreloader = false;
   //全局错误提示
   Modal.toast(data.errMsg || data.responseMsg);
 }
