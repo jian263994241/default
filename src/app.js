@@ -1,13 +1,11 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom'
-import {App, View, Pages, Preloader, mobxReact, classnames} from 'wonder'
-
+import {App, View, Pages, Preloader, classnames} from 'wonder'
+import {observer, Provider} from 'mobx-react';
 import UIState from './mod/store/UIState'
 
-import IndexPage from './mod/index'
-import OtherPage from './mod/demo'
-
-const {observer, Provider} = mobxReact;
+import IndexPage from './mod/index';
+import OtherPage from './mod/demo';
 
 const stores = {UIState};
 
