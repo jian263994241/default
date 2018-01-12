@@ -1,5 +1,6 @@
 import {Modal} from 'wonder';
 import UIState from '../store/UIState';
+import api from 'kqjs/lib/ajax/api';
 
 let domain = "";
 
@@ -13,7 +14,7 @@ if (location.host === 'www.99bill.com') {
 }
 
 const ajax = function({url, prefix = '/coc-bill-api', ...rest}){
-  const api = kqlib.api({
+  const api = api({
     url: domain + prefix + url,
     business: 'MEMBER-BASE',
     beforeSend(xhr){
