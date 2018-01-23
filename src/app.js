@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {render} from 'react-dom'
 import {Views, View, Pages, Preloader, classnames} from 'wonder'
 import {observer, Provider} from 'mobx-react';
-import find from 'lodash/find';
 import UIState from './mod/store/UIState'
 
 import IndexPage from './mod/index';
@@ -15,35 +14,15 @@ const stores = {UIState};
 class App extends Component {
 
   routes = [
-    {path: '/', component: IndexPage, title: '首页'},
-    {path: '/other', component: OtherPage, title: '更多页面'},
+    {path: '/', component: IndexPage},
+    {path: '/other', component: OtherPage},
   ]
-
-  getCurrent = ({pathname}) =>{
-    return find(this.routes, {path: pathname})
-  }
-
-  routeInit = (location, action)=>{
-    let current = this.getCurrent(location);
-    if(current){
-      document.title = current.title;
-    }
-  }
-
-  routeChange = (location, action)=>{
-    let current = this.getCurrent(location);
-    if(current){
-      document.title = current.title;
-    }
-  }
 
   render() {
     return (
       <Provider {...stores}>
         <Views
           className={classnames({ 'theme-blue': UIState.isFefan })}
-          onRouteInit={this.routeInit}
-          onRouteChange={this.routeChange}
         >
           <View type="hash">
             <Pages routes={this.routes} />
@@ -53,6 +32,10 @@ class App extends Component {
       </Provider>
     );
   }
+}
+
+window.onPageInit = ({title})=>{
+  document.title = title;
 }
 
 render(<App/>, document.querySelector('.root'));

@@ -19,7 +19,7 @@ export default class IndexPage extends Component {
 
   render() {
     return (
-      <Page>
+      <Page title="首页">
         <PageContent>
           <ContentBlockTitle>
             首页
