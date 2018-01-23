@@ -5,7 +5,7 @@ import {Page, PageContent} from 'wonder'
 export default class OtherPage extends Component {
   render() {
     return (
-      <Page title="更多页面">
+      <Page>
         <PageContent>
           //render
           //div.page-content

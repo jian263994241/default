@@ -1,6 +1,6 @@
 import {Modal} from 'wonder';
 import UIState from '../store/UIState';
-import api from 'kqjs/lib/ajax/api';
+import api from 'kqjs/lib/api';
 
 let domain = "";
 

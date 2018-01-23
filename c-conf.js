@@ -27,8 +27,8 @@ fis.match('*.html',{
     confFile: {
       res: {
         react: 'https://img.99bill.com/seashell/webapp/lib/react/15.6.1/react.js',
-        wonderCss: 'https://img.99bill.com/seashell/webapp/lib/wonder/0.4.1/css/wonder.css',
-        wonderJs: 'https://img.99bill.com/seashell/webapp/lib/wonder/0.4.1/js/wonder.js'
+        wonderCss: 'https://img.99bill.com/seashell/webapp/lib/wonder/0.4.2/css/wonder.css',
+        wonderJs: 'https://img.99bill.com/seashell/webapp/lib/wonder/0.4.2/js/wonder.js'
       }
     }
   })
@@ -40,8 +40,8 @@ fis.media('prod2')
     confFile: {
       res: {
         react: 'https://img.99bill.com/seashell/webapp/lib/react/15.6.1/react.min.js',
-        wonderCss: 'https://img.99bill.com/seashell/webapp/lib/wonder/0.4.1/css/wonder.min.css',
-        wonderJs: 'https://img.99bill.com/seashell/webapp/lib/wonder/0.4.1/js/wonder.min.js'
+        wonderCss: 'https://img.99bill.com/seashell/webapp/lib/wonder/0.4.2/css/wonder.min.css',
+        wonderJs: 'https://img.99bill.com/seashell/webapp/lib/wonder/0.4.2/js/wonder.min.js'
       }
     }
   }),

@@ -1,5 +1,6 @@
-import {mobx, kq, dom as $} from 'wonder';
+import {mobx, dom as $} from 'wonder';
 import {observable} from 'mobx';
+import env from 'kqjs/lib/api';
 
 const ss = sessionStorage || {};
 const query = $.parseQuery(location.search);
@@ -8,7 +9,7 @@ class UIState {
 
   @observable showPreloader = false;
 
-  @observable isFefan = (kqlib.Env.FeiFan || query.from === 'feifan' );
+  @observable isFefan = (env.FeiFan || query.from === 'feifan' );
 
   @observable navbar = Boolean(query.navbar == '1');
 
