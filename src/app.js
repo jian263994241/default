@@ -21,9 +21,7 @@ class App extends Component {
   render() {
     return (
       <Provider {...stores}>
-        <Views
-          className={classnames({ 'theme-blue': UIState.isFefan })}
-        >
+        <Views className={classnames({ 'theme-blue': UIState.isFefan })} >
           <View type="hash">
             <Pages routes={this.routes} />
           </View>
