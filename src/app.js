@@ -18,10 +18,17 @@ class App extends Component {
     {path: '/other', component: OtherPage},
   ]
 
+  onPageInit = ({title})=>{
+    document.title = title;
+  }
+
   render() {
     return (
       <Provider {...stores}>
-        <Views className={classnames({ 'theme-blue': UIState.isFefan })} >
+        <Views
+          className={classnames({ 'theme-blue': UIState.isFefan })}
+          onPageInit={this.onPageInit}
+        >
           <View type="hash">
             <Pages routes={this.routes} />
           </View>
@@ -32,8 +39,5 @@ class App extends Component {
   }
 }
 
-window.onPageInit = ({title})=>{
-  document.title = title;
-}
 
 render(<App/>, document.querySelector('.root'));
