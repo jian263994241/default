@@ -4,11 +4,10 @@ import {Views, View, Pages, Preloader, classnames} from 'wonder'
 import {observer, Provider} from 'mobx-react';
 import UIState from './mod/store/UIState'
 
-import IndexPage from './mod/index';
-import OtherPage from './mod/demo';
+import IndexPage from './mod/pages/index';
+import OtherPage from './mod/pages/demo';
 
 const stores = {UIState};
-
 
 @observer
 class App extends Component {

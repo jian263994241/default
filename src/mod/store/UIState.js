@@ -1,9 +1,9 @@
-import {mobx, dom as $} from 'wonder';
 import {observable} from 'mobx';
 import env from 'kqjs/lib/api';
+import parseUrlQuery from 'kqjs/lib/utils/parseUrlQuery';
 
 const ss = sessionStorage || {};
-const query = $.parseQuery(location.search);
+const query = parseUrlQuery(location.search);
 
 class UIState {
 
