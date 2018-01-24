@@ -26,7 +26,7 @@ fis.match('*.html',{
   parser: fis.plugin('getconf',{
     confFile: {
       res: {
-        react: 'https://img.99bill.com/seashell/webapp/lib/react/15.6.1/react.js',
+        react: 'https://img.99bill.com/seashell/webapp/lib/react/16.2.0/react.js',
         wonderCss: 'https://img.99bill.com/seashell/webapp/lib/wonder/0.4.2/css/wonder.css',
         wonderJs: 'https://img.99bill.com/seashell/webapp/lib/wonder/0.4.2/js/wonder.js'
       }
@@ -39,7 +39,7 @@ fis.media('prod2')
   parser: fis.plugin('getconf',{
     confFile: {
       res: {
-        react: 'https://img.99bill.com/seashell/webapp/lib/react/15.6.1/react.min.js',
+        react: 'https://img.99bill.com/seashell/webapp/lib/react/16.2.0/react.min.js',
         wonderCss: 'https://img.99bill.com/seashell/webapp/lib/wonder/0.4.2/css/wonder.min.css',
         wonderJs: 'https://img.99bill.com/seashell/webapp/lib/wonder/0.4.2/js/wonder.min.js'
       }
