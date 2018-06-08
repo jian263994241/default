@@ -1,19 +1,20 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
-import {Page, PageContent, Button, ContentBlock, ContentBlockTitle, Grid, Link} from 'wonder';
+import {Page, PageContent, Link} from 'wonder-ui/Core';
+import Button from 'wonder-ui/Button';
+import {GridRow, GridCol} from 'wonder-ui/Grid';
+import {showPreloader, hidePreloader} from 'wonder-ui/Preloader';
 import {inject, observer} from 'mobx-react';
-const {Row, Col} = Grid;
 
 @inject('UIState')
 @observer
 export default class IndexPage extends Component {
 
   showPreloader = ()=>{
-    const {UIState} = this.props;
-    UIState.showPreloader = true;
+    showPreloader();
 
     setTimeout(()=>{
-      UIState.showPreloader = false;
+      hidePreloader();
     }, 1000);
   }
 
@@ -21,19 +22,14 @@ export default class IndexPage extends Component {
     return (
       <Page title="首页">
         <PageContent>
-          <ContentBlockTitle>
-            首页
-          </ContentBlockTitle>
-          <ContentBlock>
-            <Row>
-              <Col>
-                <Button onClick={this.showPreloader}>showPreloader</Button>
-              </Col>
-              <Col>
-                <Link to="other">下一页</Link>
-              </Col>
-            </Row>
-          </ContentBlock>
+          <GridRow>
+            <GridCol width={50}>
+              <Button onClick={this.showPreloader}>showPreloader</Button>
+            </GridCol>
+            <GridCol width={50}>
+              <Link to="other">下一页</Link>
+            </GridCol>
+          </GridRow>
         </PageContent>
       </Page>
     );

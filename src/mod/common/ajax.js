@@ -1,5 +1,5 @@
 import {Modal} from 'wonder';
-import UIState from '../store/UIState';
+import {showPreloader, hidePreloader} from 'wonder-ui/Preloader';
 import api from 'kqjs/lib/api';
 
 let domain = "";
@@ -18,10 +18,10 @@ const ajax = function({url, prefix = '/coc-bill-api', ...rest}){
     url: domain + prefix + url,
     business: 'MEMBER-BASE',
     beforeSend(xhr){
-      UIState.showPreloader = true;
+      showPreloader();
     },
     complete(xhr, status){
-      UIState.showPreloader = false;
+      hidePreloader();
     },
     ...rest
   });
@@ -29,7 +29,7 @@ const ajax = function({url, prefix = '/coc-bill-api', ...rest}){
 }
 
 window.onAPIErrorHandler = function(data, status, xhr){
-  UIState.showPreloader = false;
+  hidePreloader();
   //全局错误提示
   Modal.toast(data.errMsg || data.responseMsg);
 }

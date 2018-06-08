@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom'
-import {Views, View, Pages, Preloader, classnames} from 'wonder'
+import {Views, View, Pages} from 'wonder-ui/Core';
 import {observer, Provider} from 'mobx-react';
 import UIState from './mod/store/UIState'
 
@@ -25,13 +25,11 @@ class App extends Component {
     return (
       <Provider {...stores}>
         <Views
-          className={classnames({ 'theme-blue': UIState.isFefan })}
           onPageInit={this.onPageInit}
         >
           <View type="hash">
             <Pages routes={this.routes} />
           </View>
-          <Preloader visible={UIState.showPreloader}></Preloader>
         </Views>
       </Provider>
     );

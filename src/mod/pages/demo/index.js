@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom'
-import {Page, PageContent} from 'wonder'
+import {Page, PageContent, Link} from 'wonder-ui/Core';
 
 export default class OtherPage extends Component {
   render() {

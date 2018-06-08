@@ -7,8 +7,6 @@ const query = parseUrlQuery(location.search);
 
 class UIState {
 
-  @observable showPreloader = false;
-
   @observable isFefan = (env.FeiFan || query.from === 'feifan' );
 
   @observable navbar = Boolean(query.navbar == '1');
@@ -22,8 +20,3 @@ class UIState {
 const state = new UIState;
 
 export default state;
-
-
-window.onunhandledrejection = function(){
-  state.showPreloader = false;
-};
