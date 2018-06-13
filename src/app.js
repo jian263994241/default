@@ -27,7 +27,7 @@ class App extends Component {
         <Views
           onPageInit={this.onPageInit}
         >
-          <View type="hash">
+          <View>
             <Pages routes={this.routes} />
           </View>
         </Views>
