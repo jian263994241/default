@@ -30,6 +30,6 @@
     "mobx-react": "^5.2.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
-    "wonder-ui": "^0.1.37"
+    "wonder-ui": "^0.2.0"
   }
 }

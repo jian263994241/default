@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom'
-import {Views, View, Pages} from 'wonder-ui/Core';
+import {View, Pages} from 'wonder-ui/Core';
 import {observer, Provider} from 'mobx-react';
 import UIState from './mod/store/UIState'
 
@@ -24,13 +24,9 @@ class App extends Component {
   render() {
     return (
       <Provider {...stores}>
-        <Views
-          onPageInit={this.onPageInit}
-        >
-          <View>
-            <Pages routes={this.routes} />
-          </View>
-        </Views>
+        <View onPageInit={this.onPageInit} >
+          <Pages routes={this.routes} />
+        </View>
       </Provider>
     );
   }
