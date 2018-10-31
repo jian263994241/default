@@ -26,10 +26,11 @@
   "dependencies": {
     "kqjs": "^2.0.10",
     "lodash": "^4.17.10",
-    "mobx": "^5.0.0",
-    "mobx-react": "^5.2.0",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
-    "wonder-ui": "^0.2.0"
+    "mobx": "^5.5.2",
+    "mobx-react": "^5.3.6",
+    "query-string": "^5.1.1",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
+    "wonder-ui": "^0.2.10"
   }
 }
