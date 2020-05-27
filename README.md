@@ -1,18 +1,21 @@
 # 脚手架
 
-# ale-init
+# ale-scaffold
 
 Quick start ale webpack projects.
 
 ## 全局安装
 
 ```
-npm install -g ale-init
+npm install -g ale-scaffold
 
 ```
 
-## init
+## 选择脚手架
 
 ```
+mkdir my-project
+cd ./my-project
 
+ale-sc init
 ```
