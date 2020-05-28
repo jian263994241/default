@@ -1,12 +1,15 @@
 {
-  "name": "default-config",
+  "name": "wonder-ui-config",
   "version": "1.0.0",
   "description": "base config",
   "main": "src/app.js",
   "scripts": {
+    "build": "ale build prod",
     "commit": "git-cz",
+    "dev": "ale dev",
+    "lint:fix": "eslint ./src --fix --ext .js,.jsx,.ts,.tsx",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint ./src --fix --ext .js,.jsx,.ts,.tsx"
+    "mock": "ale dev --env SERVICE_ENV=mock"
   },
   "repository": {
     "type": "git",
@@ -27,6 +30,8 @@
     "@commitlint/config-conventional": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
+    "ale-cli": "^2.1.1",
+    "babel-plugin-import": "^1.13.0",
     "cz-conventional-changelog": "^3.2.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
@@ -35,6 +40,7 @@
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^2.5.1",
     "husky": "^4.2.5",
+    "mocker-api": "^2.1.0",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
     "typescript": "^3.9.3"
@@ -51,7 +57,14 @@
     }
   },
   "dependencies": {
+    "@wonder-ui/core": "^1.2.2",
+    "axios": "^0.19.2",
+    "core-js": "^3.6.5",
+    "mobx": "^5.15.4",
+    "mobx-react-lite": "^2.0.6",
+    "mobx-state-tree": "^3.16.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "util-helpers": "^3.5.0"
   }
 }

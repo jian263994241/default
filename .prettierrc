@@ -7,7 +7,7 @@
   "parser": "babel",
   "singleQuote": true,
   "trailingComma": "all",
-  "bracketSpacing": true,
+  "bracketSpacing": false,
   "jsxBracketSameLine": false,
   "endOfLine": "lf",
   "overrides": [
