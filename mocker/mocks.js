@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const api = require('../src/config/api.json');
+const api = require('../src/config/api');
 
 const mocks = {};
 const defaultMethod = 'POST';

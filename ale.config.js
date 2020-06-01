@@ -3,7 +3,7 @@ const path = require('path');
 const pkg = require('./package.json');
 
 exports.default = {
-  entry: [require.resolve('core-js'), './src/app.jsx'],
+  entry: [require.resolve('core-js'), './src'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -13,17 +13,17 @@ exports.default = {
       '~': path.resolve(__dirname, 'src'),
       'mobx-react': 'mobx-react-lite',
     },
-    devServer: {
-      compress: true,
-      proxy: {
-        '/api': {
-          target: 'https://xxx.com',
-          changeOrigin: true,
-        },
+  },
+  devServer: {
+    compress: true,
+    proxy: {
+      '/api': {
+        target: 'https://xxx.com',
+        changeOrigin: true,
       },
-      before(app) {
-        apiMocker(app, path.resolve('./mocker/index.js'));
-      },
+    },
+    before(app) {
+      apiMocker(app, path.resolve('./mocker/index.js'));
     },
   },
   optimization: {
