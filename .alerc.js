@@ -1,8 +1,8 @@
-const apiMocker = require('mocker-api');
-const path = require('path');
-const pkg = require('./package.json');
+import apiMocker from 'mocker-api';
+import path from 'path';
+import pkg from './package.json';
 
-exports.default = {
+export default {
   entry: [require.resolve('core-js'), './src'],
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -44,10 +44,7 @@ exports.default = {
       title: '\u200E',
       mobile: true,
       appMountId: 'root',
-      scripts: [
-        'https://img.99bill.com/res/j/env/70a353fcf1150dc1.js',
-        'https://img.99bill.com/seashell/webapp/lib/kuaiqian/2.2.6/kuaiqian.min.js',
-      ],
+      scripts: [],
       chunks: ['vendor', 'main'],
     },
     define: {
@@ -93,7 +90,7 @@ exports.default = {
 };
 
 // mode: 'production',
-exports.prod = {
+export const prod = {
   output: {
     filename: 'res/j/app.[hash].js',
     chunkFilename: 'res/j/[id][chunkhash].js',
