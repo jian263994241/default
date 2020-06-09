@@ -40,6 +40,7 @@
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^2.5.1",
     "husky": "^4.2.5",
+    "git-cz": "^4.6.2",
     "mocker-api": "^2.1.0",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
